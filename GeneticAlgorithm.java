@@ -100,9 +100,9 @@ public class GeneticAlgorithm {
 		//Load data
 		ArrayList<Profesor> profesors = new ArrayList<Profesor>();
 		ArrayList<Module> modules = new ArrayList<Module>();
-		
-		Profesor p101 = new Profesor(51350111, new Module(96110), new Preference(1,6,0));
-		profesors.add(p101);
+		modules = dataLoaderModules();
+		//Profesor p101 = new Profesor(51350111, modules(1), new Preference(1,6,0));
+		//profesors.add(p101);
 		return profesors;
 	}
 	

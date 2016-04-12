@@ -12,9 +12,9 @@ public class Chromosome {
 	
 	public Chromosome() {
 		Random rand = new Random(); 
-		int day = ;
+		int day = 0;
 		
-		rand.nextInt(20)+5;
+		//rand.nextInt(20)+5;
 	}
 	
 	void addGene(Gene g){

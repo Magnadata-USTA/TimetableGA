@@ -32,6 +32,92 @@ public class GeneticAlgorithm {
 	
 	public void algorithm(){
 		
+		//Create a new faculty
+		Faculty teleco = new Faculty("Ingeniería de Telecomunicaciones");
+		
+		//Load faculty data
+		//Timeslot(int moduleID, int profesorID, char groupID, int day, int startTime, int endTime)
+		ArrayList<Timeslot> timeslots1stSemester = new ArrayList<Timeslot>();
+		Timeslot T11 = new Timeslot(96110,51350111, 'A', 1, 6, 8);
+		timeslots1stSemester.add(T11);
+		Timeslot T12 = new Timeslot(96110,51350111, 'A', 3, 8, 10);
+		timeslots1stSemester.add(T12);
+		Timeslot T13 = new Timeslot(96110,51350111, 'A', 4, 10, 12);		
+		timeslots1stSemester.add(T13);
+		Timeslot T14 = new Timeslot(96111,51350222, 'A', 2, 10, 12);		
+		timeslots1stSemester.add(T14);
+		Timeslot T15 = new Timeslot(96111,51350222, 'A', 3, 10, 12);		
+		timeslots1stSemester.add(T15);
+		Timeslot T16 = new Timeslot(96111,51350222, 'A', 5, 14, 16);		
+		timeslots1stSemester.add(T16);
+		Timeslot T17 = new Timeslot(95139,6542222, 'A', 1, 14, 16);		
+		timeslots1stSemester.add(T17);
+		Timeslot T18 = new Timeslot(95139,6542222, 'A', 4, 14, 16);		
+		timeslots1stSemester.add(T18);
+		Timeslot T19 = new Timeslot(95108,20305111, 'A', 2, 14, 16);		
+		timeslots1stSemester.add(T19);
+		Timeslot T110 = new Timeslot(95108,20305111, 'A', 5, 6, 8);		
+		timeslots1stSemester.add(T110);		
+		teleco.addTimetable(1,timeslots1stSemester);
+		
+		ArrayList<Timeslot> timeslots2ndSemester = new ArrayList<Timeslot>();
+		Timeslot T21 = new Timeslot(96113,51350111, 'A', 1, 8, 10);
+		timeslots2ndSemester.add(T21);
+		Timeslot T22 = new Timeslot(96113,51350111, 'A', 3, 10, 12);
+		timeslots2ndSemester.add(T22);
+		Timeslot T23 = new Timeslot(96113,51350111, 'A', 4, 8, 10);
+		timeslots2ndSemester.add(T23);
+		Timeslot T24 = new Timeslot(96303,51350222, 'A', 1, 10, 12);
+		timeslots2ndSemester.add(T24);
+		Timeslot T25 = new Timeslot(96303,51350222, 'A', 3, 6, 8);
+		timeslots2ndSemester.add(T25);
+		Timeslot T26 = new Timeslot(96303,51350222, 'A', 5, 8, 10);
+		timeslots2ndSemester.add(T26);
+		Timeslot T27 = new Timeslot(96109,20305111, 'A', 1, 14, 16);
+		timeslots2ndSemester.add(T27);
+		Timeslot T28 = new Timeslot(96109,20305111, 'A', 4, 12, 14);
+		timeslots2ndSemester.add(T28);
+		Timeslot T29 = new Timeslot(95284,20305222, 'A', 2, 8, 10);
+		timeslots2ndSemester.add(T29);
+		Timeslot T210 = new Timeslot(95284,20305222, 'A', 4, 10, 12);
+		timeslots2ndSemester.add(T210);
+		Timeslot T211 = new Timeslot(95140,6542111, 'A', 2, 12, 14);
+		timeslots2ndSemester.add(T211);
+		Timeslot T212 = new Timeslot(95140,6542111, 'A', 5, 14, 16);
+		timeslots2ndSemester.add(T212);		
+		teleco.addTimetable(2,timeslots2ndSemester);
+		
+		ArrayList<Timeslot> timeslots3rdSemester = new ArrayList<Timeslot>();
+		Timeslot T31 = new Timeslot(96117,51350222, 'A', 1, 6, 8);
+		timeslots3rdSemester.add(T31);
+		Timeslot T32 = new Timeslot(96117,51350222, 'A', 2, 16, 18);
+		timeslots3rdSemester.add(T32);
+		Timeslot T33 = new Timeslot(96117,51350222, 'A', 4, 18, 20);
+		timeslots3rdSemester.add(T33);
+		Timeslot T34 = new Timeslot(96115,51350333, 'B', 1, 10, 12);
+		timeslots3rdSemester.add(T34);
+		Timeslot T35 = new Timeslot(96115,51350333, 'B', 3, 10, 12);
+		timeslots3rdSemester.add(T35);
+		Timeslot T36 = new Timeslot(96115,51350333, 'B', 5, 8, 10);
+		timeslots3rdSemester.add(T36);
+		Timeslot T37 = new Timeslot(96115,51350111, 'A', 1, 14, 16);
+		timeslots3rdSemester.add(T37);
+		Timeslot T38 = new Timeslot(96115,51350111, 'A', 2, 8, 10);
+		timeslots3rdSemester.add(T38);
+		Timeslot T39 = new Timeslot(96115,51350111, 'A', 4, 8, 10);
+		timeslots3rdSemester.add(T39);
+		Timeslot T310 = new Timeslot(95141,6542111, 'A', 2, 10, 12);
+		timeslots3rdSemester.add(T310);
+		Timeslot T311 = new Timeslot(95141,6542111, 'A', 3, 8, 10);
+		timeslots3rdSemester.add(T311);
+		Timeslot T312 = new Timeslot(96112,51350333, 'A', 2, 12, 14);
+		timeslots3rdSemester.add(T312);
+		Timeslot T313 = new Timeslot(96112,51350333, 'A', 4, 10, 12);
+		timeslots3rdSemester.add(T313);
+		Timeslot T314 = new Timeslot(96112,51350333, 'A', 5, 6, 8);
+		timeslots3rdSemester.add(T314);
+		teleco.addTimetable(3,timeslots3rdSemester);
+		
 		ArrayList<Course> Courses = new ArrayList<Course>();
 		Courses = dataLoaderCourses();
 		for (Course number : Courses) {

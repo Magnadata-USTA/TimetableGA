@@ -11,8 +11,10 @@ public class Faculty {
 	}
 	
 	void addTimetable(int semesterID, ArrayList<Timeslot> timeslots){ 
-		Timetable t = new Timetable(semesterID, timeslots);
+		Timetable t = new Timetable(semesterID, timeslots);				
+		ArrayList<Timetable> timetables = new ArrayList<Timetable>();
 		timetables.add(t);
+		this.timetables = timetables;
 	}
 
 }

@@ -24,9 +24,12 @@ public class GeneticAlgorithm {
 		for (int j = 0; j<10; j++)
 	     {
 			System.out.println(rand.nextInt(20)+5);
+			System.out.println(rand.nextInt(20)+5);
 	     }
 		
 		ga.algorithm();
+		
+		//This is a comment!
 	}
 	
 	

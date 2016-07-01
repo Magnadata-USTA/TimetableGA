@@ -25,7 +25,7 @@ public class GeneticAlgorithm {
 	     {
 			System.out.println(rand.nextInt(20)+5);
 			System.out.println(rand.nextInt(20)+5);
-			
+			System.out.println(rand.nextInt(20)+5);
 	     }
 		
 		ga.algorithm();

@@ -12,7 +12,7 @@ public class Preference {
 	public Preference(int day, int startTime, int value) {
 		this.day = day;
 		this.startTime = startTime;
-		this.value = value;
+		this.value = 0;
 	}
 
 }

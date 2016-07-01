@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-
 public class GeneticAlgorithm {
 	//private Arrays population;
 	private int numGenerations;
@@ -13,8 +12,9 @@ public class GeneticAlgorithm {
 	public GeneticAlgorithm(int sizeElite, int numGenerations){
 		this.sizeElite = sizeElite;
 		this.numGenerations = numGenerations;
-		//population = this.population;
+		//population = this.population;		
 	}
+	
 	
 	public static void main (String args[]){
 		GeneticAlgorithm ga = new GeneticAlgorithm(1000,5);
@@ -24,23 +24,41 @@ public class GeneticAlgorithm {
 		for (int j = 0; j<10; j++)
 	     {
 			System.out.println(rand.nextInt(20)+5);
-			System.out.println(rand.nextInt(20)+5);
-			System.out.println(rand.nextInt(20)+5);
 	     }
 		
 		ga.algorithm();
+		
 		
 		//This is a comment!
 	}
 	
 	
 	public void algorithm(){
+		ArrayList<Course> Courses = new ArrayList<Course>();
+		Courses = dataLoaderCourses();
+		for (Course number : Courses) {
+			   System.out.println("Number = " + number);
+		}  
+		//Load initial data from others departments
+		Faculty teleco = new Faculty("Ing. Telecomunicaciones");
+		teleco = dataLoaderBaseTimetables();
+	}
+	
+	void initiatePopulation(int size){ 
 		
+	}
+	
+	void orderByValue(){
+		
+	}
+	
+	public Faculty dataLoaderBaseTimetables(){
+		//add timetables BaseChromosome; Base solution given by others departments
 		//Create a new faculty
-		Faculty teleco = new Faculty("IngenierÃ­a de Telecomunicaciones");
+	    Faculty teleco = new Faculty("IngenierÃ­a de Telecomunicaciones");				
+		//Load faculty data						
+		//Timeslot(int moduleID, int profesorID, char groupID, int day, int startTime, int endTime)		
 		
-		//Load faculty data
-		//Timeslot(int moduleID, int profesorID, char groupID, int day, int startTime, int endTime)
 		ArrayList<Timeslot> timeslots1stSemester = new ArrayList<Timeslot>();
 		Timeslot T11 = new Timeslot(96110,51350111, 'A', 1, 6, 8);
 		timeslots1stSemester.add(T11);
@@ -122,26 +140,14 @@ public class GeneticAlgorithm {
 		timeslots3rdSemester.add(T314);
 		teleco.addTimetable(3,timeslots3rdSemester);
 		
-		ArrayList<Course> Courses = new ArrayList<Course>();
-		Courses = dataLoaderCourses();
-		for (Course number : Courses) {
-			   System.out.println("Number = " + number);
-		}  
-	}
-	
-	void initiatePopulation(int size){ 
-	
-	}
-	
-	void orderByValue(){
-		
+		return teleco;
 	}
 	
 	ArrayList<Module> dataLoaderModules(){
 		ArrayList<Module> modules = new ArrayList<Module>();
 		//Module(int moduleID, int semesterID, String name, int duration, int hoursPerWeek, String group)
 		// 1st semester Modules
-		Module m10 = new Module (96110, 1, "CÃ�LCULO DIFERENCIAL", 2, 6, "Ciencias BÃ¡sicas");
+		Module m10 = new Module (96110, 1, "CaLCULO DIFERENCIAL", 2, 6, "Ciencias BÃ¡sicas");
 		modules.add(m10);
 		Module m11 = new Module(96111, 1, "Ã�LGEBRA LINEAL", 2, 6, "Ciencias BÃ¡sicas");
 		modules.add(m11);
@@ -276,8 +282,7 @@ public class GeneticAlgorithm {
 		Profesor p10 = new Profesor(80876333, modulesP10, preferencesP10);
 		profesors.add(p10);	
 
-		return profesors;
-		
+		return profesors;		
 	}
 	
 	ArrayList<Course> dataLoaderCourses(){

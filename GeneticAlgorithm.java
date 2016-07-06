@@ -1,3 +1,4 @@
+import java.security.AlgorithmConstraints;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -20,15 +21,15 @@ public class GeneticAlgorithm {
 		GeneticAlgorithm ga = new GeneticAlgorithm(1000,5);
 		System.out.println("size elite " + Integer.toString(ga.sizeElite) + " size Gen " + ga.numGenerations);
 		
+/**
 		Random rand = new Random(); 
 		for (int j = 0; j<10; j++)
 	     {
 			System.out.println(rand.nextInt(20)+5);
 	     }
+**/	     
 		
 		ga.algorithm();
-		
-		
 		//This is a comment!
 	}
 	
@@ -36,12 +37,96 @@ public class GeneticAlgorithm {
 	public void algorithm(){
 		ArrayList<Course> Courses = new ArrayList<Course>();
 		Courses = dataLoaderCourses();
-		for (Course number : Courses) {
-			   System.out.println("Number = " + number);
-		}  
-		//Load initial data from others departments
-		Faculty teleco = new Faculty("Ing. Telecomunicaciones");
-		teleco = dataLoaderBaseTimetables();
+		//add timetables BaseChromosome; Base solution given by others departments
+		//Create a new faculty
+	    Faculty teleco = new Faculty("IngenierÃ­a de Telecomunicaciones");				
+		//Load faculty data						
+		//Timeslot(int moduleID, int profesorID, char groupID, int day, int startTime, int endTime)		
+		
+	    Chromosome aye = new Chromosome();
+	    Gene x = new Gene(1,1,6,96110);
+	    aye.addGene(x);
+	    Gene x1 = new Gene(1,3,8,96110);
+	    aye.addGene(x1);
+	    Gene x2 = new Gene(1,4,10,96110);
+	    aye.addGene(x2);
+	    Gene x3 = new Gene(1,2,10,96111);
+	    aye.addGene(x3);
+	    Gene x4 = new Gene(1,3,10,96111);
+	    aye.addGene(x4);
+	    Gene x5 = new Gene(1,5,14,96111);
+	    aye.addGene(x5);
+	    Gene x6 = new Gene(1,1,14,95139);
+	    aye.addGene(x6);
+	    Gene x7 = new Gene(1,4,14,95139);
+	    aye.addGene(x7);
+	    Gene x8 = new Gene(1,2,14,95139);
+	    aye.addGene(x8);
+	    Gene x9 = new Gene(1,5,6,95108);
+	    aye.addGene(x9);
+	    
+	    aye.getValue(1);
+		
+		ArrayList<Timeslot> timeslots2ndSemester = new ArrayList<Timeslot>();
+		Timeslot T21 = new Timeslot(96113,51350111, 'A', 1, 8, 10);
+		timeslots2ndSemester.add(T21);
+		Timeslot T22 = new Timeslot(96113,51350111, 'A', 3, 10, 12);
+		timeslots2ndSemester.add(T22);
+		Timeslot T23 = new Timeslot(96113,51350111, 'A', 4, 8, 10);
+		timeslots2ndSemester.add(T23);
+		Timeslot T24 = new Timeslot(96303,51350222, 'A', 1, 10, 12);
+		timeslots2ndSemester.add(T24);
+		Timeslot T25 = new Timeslot(96303,51350222, 'A', 3, 6, 8);
+		timeslots2ndSemester.add(T25);
+		Timeslot T26 = new Timeslot(96303,51350222, 'A', 5, 8, 10);
+		timeslots2ndSemester.add(T26);
+		Timeslot T27 = new Timeslot(96109,20305111, 'A', 1, 14, 16);
+		timeslots2ndSemester.add(T27);
+		Timeslot T28 = new Timeslot(96109,20305111, 'A', 4, 12, 14);
+		timeslots2ndSemester.add(T28);
+		Timeslot T29 = new Timeslot(95284,20305222, 'A', 2, 8, 10);
+		timeslots2ndSemester.add(T29);
+		Timeslot T210 = new Timeslot(95284,20305222, 'A', 4, 10, 12);
+		timeslots2ndSemester.add(T210);
+		Timeslot T211 = new Timeslot(95140,6542111, 'A', 2, 12, 14);
+		timeslots2ndSemester.add(T211);
+		Timeslot T212 = new Timeslot(95140,6542111, 'A', 5, 14, 16);
+		timeslots2ndSemester.add(T212);		
+		teleco.addTimetable(2,timeslots2ndSemester);
+		
+		ArrayList<Timeslot> timeslots3rdSemester = new ArrayList<Timeslot>();
+		Timeslot T31 = new Timeslot(96117,51350222, 'A', 1, 6, 8);
+		timeslots3rdSemester.add(T31);
+		Timeslot T32 = new Timeslot(96117,51350222, 'A', 2, 16, 18);
+		timeslots3rdSemester.add(T32);
+		Timeslot T33 = new Timeslot(96117,51350222, 'A', 4, 18, 20);
+		timeslots3rdSemester.add(T33);
+		Timeslot T34 = new Timeslot(96115,51350333, 'B', 1, 10, 12);
+		timeslots3rdSemester.add(T34);
+		Timeslot T35 = new Timeslot(96115,51350333, 'B', 3, 10, 12);
+		timeslots3rdSemester.add(T35);
+		Timeslot T36 = new Timeslot(96115,51350333, 'B', 5, 8, 10);
+		timeslots3rdSemester.add(T36);
+		Timeslot T37 = new Timeslot(96115,51350111, 'A', 1, 14, 16);
+		timeslots3rdSemester.add(T37);
+		Timeslot T38 = new Timeslot(96115,51350111, 'A', 2, 8, 10);
+		timeslots3rdSemester.add(T38);
+		Timeslot T39 = new Timeslot(96115,51350111, 'A', 4, 8, 10);
+		timeslots3rdSemester.add(T39);
+		Timeslot T310 = new Timeslot(95141,6542111, 'A', 2, 10, 12);
+		timeslots3rdSemester.add(T310);
+		Timeslot T311 = new Timeslot(95141,6542111, 'A', 3, 8, 10);
+		timeslots3rdSemester.add(T311);
+		Timeslot T312 = new Timeslot(96112,51350333, 'A', 2, 12, 14);
+		timeslots3rdSemester.add(T312);
+		Timeslot T313 = new Timeslot(96112,51350333, 'A', 4, 10, 12);
+		timeslots3rdSemester.add(T313);
+		Timeslot T314 = new Timeslot(96112,51350333, 'A', 5, 6, 8);
+		timeslots3rdSemester.add(T314);
+		teleco.addTimetable(3,timeslots3rdSemester);
+		
+		
+
 	}
 	
 	void initiatePopulation(int size){ 
@@ -140,6 +225,7 @@ public class GeneticAlgorithm {
 		timeslots3rdSemester.add(T314);
 		teleco.addTimetable(3,timeslots3rdSemester);
 		
+
 		return teleco;
 	}
 	

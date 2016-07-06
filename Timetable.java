@@ -10,5 +10,13 @@ public class Timetable {
 		this.semesterID = semesterID;
 		this.timeslots = timeslots;
 	}
+	
+	public Timetable(){
+		
+	}
+	
+	public int getSemesterID(){
+		return this.semesterID;
+	}
 
 }

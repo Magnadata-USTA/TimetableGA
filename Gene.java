@@ -27,4 +27,7 @@ public class Gene {
 	int getStartTime(){
 		return startTime;
 	}
+	int getModuleID(){
+		return moduleID;
+	}
 }

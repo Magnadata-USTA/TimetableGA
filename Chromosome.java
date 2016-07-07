@@ -105,8 +105,6 @@ public class Chromosome {
 			int b = 0;
 			for (int x = 0; x < genesSemester.length; x++) {			    
 				 //System.out.println(genesSemester[x][yy]);
-				 //System.out.println(initialPoint[x][yy]);
-				 //System.out.println(endingPoint[x][yy]);
 			     if (initialPoint[x][yy] == 1) b = 1;
 			     if (b == 1) {
 				    if(genesSemester[x][yy] != null){

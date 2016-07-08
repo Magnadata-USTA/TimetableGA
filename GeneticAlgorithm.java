@@ -65,7 +65,7 @@ public class GeneticAlgorithm {
 	    Gene x9 = new Gene(1,5,6,95108);
 	    aye.addGene(x9);
 	    
-	    aye.fitness(1);
+	    aye.fitness();
 		
 		ArrayList<Timeslot> timeslots2ndSemester = new ArrayList<Timeslot>();
 		Timeslot T21 = new Timeslot(96113,51350111, 'A', 1, 8, 10);

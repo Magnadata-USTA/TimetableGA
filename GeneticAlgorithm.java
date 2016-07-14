@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import dominio.GettingTimeTables;
+
 public class GeneticAlgorithm {
 	//private Arrays population;
 	private int numGenerations;
@@ -21,6 +23,8 @@ public class GeneticAlgorithm {
 		GeneticAlgorithm ga = new GeneticAlgorithm(1000,5);
 		System.out.println("size elite " + Integer.toString(ga.sizeElite) + " size Gen " + ga.numGenerations);
 		
+		GettingTimeTables t = new GettingTimeTables();
+		System.out.println(t.getClass());
 /**
 		Random rand = new Random(); 
 		for (int j = 0; j<10; j++)

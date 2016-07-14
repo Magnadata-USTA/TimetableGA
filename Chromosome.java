@@ -6,19 +6,15 @@ import java.util.ArrayList;
 public class Chromosome {
 
 	private ArrayList<Gene> genes;
-	//private moduleConstraint;
 	
 	public Chromosome() {
-		//Random rand = new Random(); 
-		//int day = 0;
-		//rand.nextInt(20)+5;
+		
 		genes = new ArrayList<Gene>();
 	}
 	
-	void addGene(Gene g){		
+	void addGene(Gene g){
+		
 		genes.add(g);
-		//System.out.println(g);
-		//Gene g1 = new Gene(1,2,3);
 	}
 	
 	void getValue(){
@@ -35,11 +31,13 @@ public class Chromosome {
 		
 		int deadTimeValue;
 		int hourcheckValue;
+		int daycheckValue;
 		int totalValue;
 		int a = 1;
 		deadTimeValue = deadTime(a);
-		hourcheckValue = hourCheck( a , 14 );
-		totalValue = deadTimeValue+hourcheckValue;
+		hourcheckValue = hourCheck( a , 14 ); //must fix hour for the user's will
+		daycheckValue = dayCheck(6);
+		totalValue = deadTimeValue+hourcheckValue+daycheckValue;
 		System.out.println(hourcheckValue);
 		System.out.println("La cantidad de bloques libres de este horario es de : "+totalValue);
 	}
@@ -171,6 +169,22 @@ public class Chromosome {
 		}
 		//System.out.print (hourcheckValue);
 		return hourcheckValue;		
+	}
+	
+	int dayCheck(int day){
+			
+		int daycheckValue = 0;
+		for (int i = 0 ; i < genes.size() ; i++) {			
+			Gene x = new Gene();
+		    x = genes.get(i);
+			int saturday;
+			saturday = x.getDay();
+			if (day == saturday){
+				daycheckValue = daycheckValue+1;
+			}
+		}
+		//System.out.print (hourcheckValue);
+		return daycheckValue;		
 	}
 }
 

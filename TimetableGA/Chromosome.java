@@ -1,6 +1,7 @@
 package TimetableGA;
 
 import java.util.ArrayList;
+
 import DataLoading.*;
 /*
  * Chromosome: valid solution. 
@@ -19,10 +20,6 @@ public class Chromosome {
 		genes.add(g);
 	}
 	
-	void getValue(){
-				
-	}
-
 	void isValid(){
 		
 	}
@@ -40,8 +37,9 @@ public class Chromosome {
 		hourcheckValue = hourCheck( a , 14 ); //must fix hour for the user's will
 		daycheckValue = dayCheck(6);
 		totalValue = deadTimeValue+hourcheckValue+daycheckValue;
-		System.out.println(hourcheckValue);
+		//System.out.println(hourcheckValue);
 		System.out.println("La cantidad de bloques libres de este horario es de : "+totalValue);
+		
 	}
 	
 	int deadTime(int semesterID){
@@ -57,7 +55,7 @@ public class Chromosome {
 		int [] basePoints = new int[numDays];
 		int [] startPoints = new int[numDays];
 		int [] lastPoints = new int[numDays];
-		for (int i = 0; i < genes.size(); i++) {			
+		for (int i = 0; i < genes.size(); i++) {
 			Gene y = new Gene();
 		    y = genes.get(i);
 			int semester;

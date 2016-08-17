@@ -25,11 +25,14 @@ public class GeneticAlgorithm {
 	public static void main (String args[]){
 		GeneticAlgorithm ga = new GeneticAlgorithm(1000,5);
 		System.out.println("size elite " + Integer.toString(ga.sizeElite) + " size Gen " + ga.numGenerations);
-	
-		RTimetable tt = new RTimetable();
-		tt.getClass();
-		System.out.println();
 		
+		 Chromosome aye = new Chromosome();
+		
+		// Load data
+		RTimetable tt = new RTimetable();
+	    aye = tt.loadChromosome();	
+	    aye.fitness();
+		//System.out.println("imprimir cromosoma"+aye);		
 		ga.algorithm();
 		//This is a comment!
 	}

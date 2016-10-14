@@ -9,7 +9,7 @@ public class Timetable {
 	
 	public Timetable(int semesterID, ArrayList<Timeslot> timeslots) {
 		this.semesterID = semesterID;
-		this.timeslots = timeslots;
+		this.setTimeslots(timeslots);
 	}
 	
 	public Timetable(){
@@ -18,6 +18,14 @@ public class Timetable {
 	
 	public int getSemesterID(){
 		return this.semesterID;
+	}
+
+	public ArrayList<Timeslot> getTimeslots() {
+		return timeslots;
+	}
+
+	public void setTimeslots(ArrayList<Timeslot> timeslots) {
+		this.timeslots = timeslots;
 	}
 
 }

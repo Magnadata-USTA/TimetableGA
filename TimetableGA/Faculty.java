@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Faculty {
 	
+	private ArrayList<Module> modules;
+	private ArrayList<Course> courses;
 	private String name;
 	private ArrayList<Timetable> timetables;
 	
@@ -12,9 +14,24 @@ public class Faculty {
 	}
 	
 	public Faculty() {
+		modules = new ArrayList<Module>();
+		courses = new ArrayList<Course>();
 	
 	}
+	public void addModule(Module g){
+		
+		modules.add(g);
+	}
 	
+	public void addCourse(Course g){
+		
+		courses.add(g);
+	}
+	
+	public ArrayList<Module> getModules(){
+		return modules;
+	}
+/*
 	void addTimetable(int semesterID, ArrayList<Timeslot> timeslots){ 
 		Timetable t = new Timetable(semesterID, timeslots);				
 		ArrayList<Timetable> timetables = new ArrayList<Timetable>();
@@ -41,5 +58,6 @@ public class Faculty {
 		//System.out.println(ttables);
 		return ttables;
 	}
+*/
 	
 }

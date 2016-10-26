@@ -22,6 +22,11 @@ package TimetableGA;
  	void getValue(){
  			
  	}
+ 	
+ 	ArrayList<Gene> getGene(){
+ 		
+ 		return genes;		
+ 	}
  
  	void isValid(){
  		
@@ -36,6 +41,7 @@ package TimetableGA;
  		for( int i = 1 ; i <= Constraints.NUMBER_SEMESTERS ; i++ ){
  			deadTimeValue = deadTimeValue + deadTime(i);
  			hourcheckValue = hourcheckValue + hourCheck(i, Constraints.LUNCH_TIME) + hourCheck(i, Constraints.END_TIME);
+ 			System.out.println();
  		}
  		
  		fitness = deadTimeValue+hourcheckValue;

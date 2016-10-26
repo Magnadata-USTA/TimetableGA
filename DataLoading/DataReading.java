@@ -83,7 +83,7 @@ public class DataReading{
 	            	for( int i = 0 ; i < modulesID.length ; i++){
 			        	if (modulesID[i] == moduleID2){
 		            		c.addCourse(new Course(modules.get(i).getModuleID(), modules.get(i).getSemesterID(), modules.get(i).getName(), modules.get(i).getDuration(), modules.get(i).getHoursPerWeek(), modules.get(i).getGroup(), moduleID2, profesorID, courseID));
-		            		System.out.println(moduleID2 + " "+ courseID);	
+		            		//System.out.println(moduleID2 + " "+ courseID);	
 		            		break;
 		            	}	
 			        }		        

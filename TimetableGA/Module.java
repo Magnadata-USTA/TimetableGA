@@ -9,6 +9,10 @@ public class Module {
 	private int hoursPerWeek;
 	private String group;
 	
+	public Module(){
+		
+	}
+	
 	public Module(int moduleID, int semesterID, String name, int duration, int hoursPerWeek, String group){
 		this.setModuleID(moduleID);
 		this.setSemesterID(semesterID);

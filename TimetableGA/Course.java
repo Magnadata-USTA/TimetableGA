@@ -7,6 +7,10 @@ public class Course extends Module {
 	private int profesorID;
 	private String courseID;
 	
+	public Course(){
+		
+	}
+	
 	public Course(int moduleID, int semesterID, String name, int duration, int hoursPerWeek, String group, int moduleID2, int profesorID, String courseID) {
 		super(moduleID, semesterID, name, duration, hoursPerWeek, group);
 		this.setModuleID2(moduleID2);

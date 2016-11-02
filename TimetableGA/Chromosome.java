@@ -1,7 +1,8 @@
 package TimetableGA;
  
  import java.util.ArrayList;
- import DataLoading.*;
+
+import DataLoading.*;
 
  public class Chromosome {
  
@@ -55,7 +56,7 @@ package TimetableGA;
  		//This method analyze the timetables and say how many deadtimes are between classes	
  		
  		int numDays = Constraints.DAY_MAX;
- 		int numTimeslots = ((Constraints.HR_MAX-Constraints.HR_MIN)/2);
+ 		int numTimeslots = ((Constraints.HR_MAX-Constraints.EARLIEST_TIME)/2);
  		Gene [][] genesSemester = new Gene[numTimeslots][numDays];
  		int [][] genesModuleID = new int[numTimeslots][numDays];
  		int [][] initialPoint = new int[numTimeslots][numDays];
@@ -74,7 +75,7 @@ package TimetableGA;
  			semester = y.getSemesterID();
  			if (semesterID == semester){
  				int timeslotsValue;
- 				timeslotsValue = (startTime-Constraints.HR_MIN)/2;
+ 				timeslotsValue = (startTime-Constraints.EARLIEST_TIME)/2;
  				genesSemester[timeslotsValue][day-1] = y;
  				genesModuleID[timeslotsValue][day-1] = y.getModuleID();
  				}
@@ -197,8 +198,27 @@ package TimetableGA;
  		//System.out.print (hourcheckValue);
  		return daycheckValue;		
  	}
+ //________________________________________________________________________________________________________________	
+ // Check functions
  	
+ 	//check if a given timeslot is empty for assignment
+ 	//return true if available or false if it´s not
  	
+	public boolean checkTimeslotAvailability(Gene gene){
+ 		int semesterID = gene.getSemesterID();
+ 		int moduleID = gene.getModuleID();
+ 		int groupID = gene.getGroupID();
+ 		int day = gene.getDay();
+ 		int startTime = gene.getStartTime();
+ 		
+ 		for ( int i = 0 ; i < this.genes.size() ; i++ ){
+ 			if ( semesterID == this.genes.get(i).getSemesterID() ){
+ 				return false;
+ 			}
+ 		}
+ 		
+ 		return true; 		
+ 	}
  	
  	
  	

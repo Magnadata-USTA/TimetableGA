@@ -28,8 +28,12 @@ public class Faculty {
 		courses.add(g);
 	}
 	
+	public ArrayList<Course> getCourses() {
+		return this.courses;
+	}
+	
 	public ArrayList<Module> getModules(){
-		return modules;
+		return this.modules;
 	}
 /*
 	void addTimetable(int semesterID, ArrayList<Timeslot> timeslots){ 

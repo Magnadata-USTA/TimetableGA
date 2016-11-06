@@ -56,8 +56,7 @@ public class GeneticAlgorithm {
 	}
 	
 	void initiatePopulation(int size, Chromosome baseChromosome, Faculty faculty){ 
-		
-		ArrayList<Gene> initialPopulation = new ArrayList<Gene>();		
+			
 		
 		Chromosome newPopulation = new Chromosome();
 		newPopulation = baseChromosome;

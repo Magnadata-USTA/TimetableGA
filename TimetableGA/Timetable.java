@@ -9,7 +9,7 @@ public class Timetable {
 	
 	public Timetable(int semesterID, ArrayList<Timeslot> timeslots) {
 		this.semesterID = semesterID;
-		this.setTimeslots(timeslots);
+		//this.setTimeslots(timeslots);
 	}
 	
 

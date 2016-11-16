@@ -55,35 +55,83 @@ public class GeneticAlgorithm {
 	    
 	}
 	
-	void initiatePopulation(int size, Chromosome baseChromosome, Faculty faculty){ 
-			
+	void initiatePopulation(int size, Chromosome baseChromosome, Faculty faculty){ 			
 		
 		Chromosome newPopulation = new Chromosome();
-		newPopulation = baseChromosome;
-	
- 		
-		ArrayList<Course> courses = faculty.getCourses();
-		
+		newPopulation = baseChromosome; 		
+		ArrayList<Course> courses = faculty.getCourses();		
 		for ( int i = 0 ; i < courses.size() ;  i++){
 			int duration = courses.get(i).getDuration();
 			int hoursPerWeek = courses.get(i).getHoursPerWeek();
 			int numberTimeslots = hoursPerWeek/duration;
 			for ( int j = 0 ; j < numberTimeslots ; j++ ){
-				System.out.println(courses.get(i).getModuleID()+" "+courses.get(i).getCourseID()+" = "+numberTimeslots);
-				Random randomNumber = new Random();
-				int day = (randomNumber.nextInt(Constraints.DAY_MAX-Constraints.DAY_MIN) + Constraints.DAY_MIN); 
-				randomNumber = new Random();
-				int startTime = (randomNumber.nextInt(Constraints.LATEST_TIME-Constraints.EARLIEST_TIME) + Constraints.EARLIEST_TIME);
-				if ( startTime%2 != 0 ){
-					startTime = startTime+1;
-				}
-				//System.out.println(day +"  "+ startTime);
-				
-			}
-			
-			
-		}
- 		
+				boolean availability = false;
+				while(availability == false){
+						System.out.println(courses.get(i).getModuleID()+" "+courses.get(i).getCourseID()+" = "+numberTimeslots);
+						Random randomNumber = new Random();
+						int day = (randomNumber.nextInt(Constraints.DAY_MAX-Constraints.DAY_MIN) + Constraints.DAY_MIN); 
+						randomNumber = new Random();
+						int startTime = (randomNumber.nextInt(Constraints.LATEST_TIME-Constraints.EARLIEST_TIME) + Constraints.EARLIEST_TIME);
+						if ( startTime%2 != 0 ){
+							startTime = startTime+1;
+						}
+						Gene testingGene = new Gene(courses.get(i).getSemesterID(), day, startTime, courses.get(i).getModuleID());
+						availability = newPopulation.checkTimeslotAvailability(testingGene);
+						if ( availability == true ){
+							newPopulation.addGene(testingGene);
+							//printOnScreen(newPopulation, 3);
+						System.out.println(day +"  "+ startTime + "  "+availability);//break;
+						}
+				}	
+			}break;
+		}		
+	}
+	
+	void printOnScreen(Chromosome baseChromosome, int semesterID){
+		
+		/*
+		 * This is the way to print all semesters
+		 * 
+		 * for( int ii = 1 ; ii <= Constraints.NUMBER_SEMESTERS ; ii++ ){
+		  		printOnScreen(newPopulation, ii);
+				System.out.println();}
+		 */
+		
+		int numDays = Constraints.DAY_MAX;
+ 		int numTimeslots = ((Constraints.HR_MAX-Constraints.EARLIEST_TIME)/2);
+ 		Gene [][] genesSemester = new Gene[numTimeslots][numDays];
+ 		int [][] variableToPrint = new int[numTimeslots][numDays];
+ 		for (int i = 0; i < baseChromosome.getGene().size(); i++) {			
+ 			Gene y = new Gene();
+ 		    y = baseChromosome.getGene().get(i);
+ 			int semester;
+ 			int day;
+ 			int startTime;
+ 			startTime = y.getStartTime();
+ 			day = y.getDay();
+ 			semester = y.getSemesterID();
+ 			if (semesterID == semester){
+ 				int timeslotsValue;
+ 				timeslotsValue = (startTime-Constraints.EARLIEST_TIME)/2;
+ 				genesSemester[timeslotsValue][day-1] = y;
+ 				/*
+ 				 * The variable shown on the screen can be change in the next line
+ 				 * It must be type INT
+ 				 */
+ 				variableToPrint[timeslotsValue][day-1] = y.getSemesterID();
+ 				}
+ 		}		
+		//The next 'for' shows the timetable on the screen
+ 		for (int x=0; x < genesSemester.length; x++) {
+ 			  System.out.print("|");
+ 			  for (int yy=0; yy < genesSemester[x].length; yy++) {
+ 			    System.out.print (variableToPrint[x][yy]);
+ 			    if (yy!=genesSemester[x].length) System.out.print("\t\t");
+ 			  }
+ 			  System.out.println("|");
+ 		}	
+		
+		
 		
 	}
 	

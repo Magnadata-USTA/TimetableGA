@@ -10,8 +10,8 @@ public class Gene {
 	private int startTime;
 	private int endTime;
 	
-	public Gene(int semesterID, int moduleID, int profesorID, char groupID, int day, int startTime, int endTime) {
-
+	public Gene(int semesterID, /*int moduleID, int profesorID, char groupID,*/ int day, int startTime, /*int endTime,*/int moduleID) {
+		//semesterID, day, startTime, moduleID)
 		this.semesterID = semesterID;
 		this.moduleID = moduleID;
 		this.profesorID = profesorID;
@@ -28,17 +28,27 @@ public class Gene {
 	int getSemesterID(){
 		return semesterID;
 	}
-	
+	public void seSemesterID(int semesterID) {
+		this.semesterID = semesterID;
+	}
 	int getDay(){
 		return day;
+	}
+	public void setDay(int day) {
+		this.day = day;
 	}
 	int getStartTime(){
 		return startTime;
 	}
+	public void setStartTime(int startTime) {
+		this.startTime = startTime;
+	}
 	int getModuleID(){
 		return moduleID;
 	}
-
+	public void setModuleID(int moduleID) {
+		this.moduleID = moduleID;
+	}
 	public int getProfesorID() {
 		return profesorID;
 	}
@@ -50,7 +60,9 @@ public class Gene {
 	public char getGroupID() {
 		return groupID;
 	}
-
+	public void setGroupID(char groupID) {
+		this.groupID = groupID;
+	}
 	public int getEndTime() {
 		return endTime;
 	}

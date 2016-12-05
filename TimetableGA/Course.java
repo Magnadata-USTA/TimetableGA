@@ -3,10 +3,10 @@ package TimetableGA;
 public class Course extends Module {
 
 	private int profesorID;
-	private String courseID;
+	private char courseID;
 	
 	
-	public Course(int moduleID, int semesterID, String name, int duration, int hoursPerWeek, String group, int profesorID, String courseID) {
+	public Course(int moduleID, int semesterID, String name, int duration, int hoursPerWeek, String group, int profesorID, char courseID) {
 		super(moduleID, semesterID, name, duration, hoursPerWeek, group);
 		this.setCourseID(courseID);
 		this.setProfesorID(profesorID);		
@@ -20,11 +20,11 @@ public class Course extends Module {
 		this.profesorID = profesorID;
 	}
 
-	public String getCourseID() {
+	public char getCourseID() {
 		return courseID;
 	}
 
-	public void setCourseID(String courseID) {
+	public void setCourseID(char courseID) {
 		this.courseID = courseID;
 	}
 		

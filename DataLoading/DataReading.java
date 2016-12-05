@@ -21,13 +21,15 @@ public class DataReading{
 	        {
 	        	String sID = baseTimetable_import.get("semesterID");
 	        	int semesterID = Integer.parseInt(sID);
+	        	String cID = baseTimetable_import.get("courseID");
+	        	char courseID = cID.charAt(0);
 	        	String mID = baseTimetable_import.get("moduleID");
 	        	int moduleID = Integer.parseInt(mID);
 	        	String d = baseTimetable_import.get("day");
 	        	int day = Integer.parseInt(d);
 	        	String sT = baseTimetable_import.get("startTime");
 	        	int startTime = Integer.parseInt(sT);       	         
-	            c.addGene(new Gene(semesterID, day, startTime, moduleID)); 	            	        
+	            c.addGene(new Gene(semesterID, courseID, day, startTime, moduleID)); 	            	        
 	        }	         
 	        baseTimetable_import.close();	         
 	        } catch (FileNotFoundException e) {
@@ -59,7 +61,8 @@ public class DataReading{
 	        	int duration = Integer.parseInt(du);
 	        	String hpw = module_import.get("hoursPerWeek");
 	        	int hoursPerWeek = Integer.parseInt(hpw);
-	        	String group = module_import.get("group");  
+	        	String group = module_import.get("group"); 
+	        	System.out.println("VERIFICACION DELL GRUPO"+group);
 	        	c.addModule(new Module(moduleID, semesterID, name, duration, hoursPerWeek, group));
 	        	
 	        }
@@ -79,7 +82,8 @@ public class DataReading{
 		        	//System.out.println(moduleID2);
 		        	String pr = course_import.get("profesorID");
 		        	int profesorID = Integer.parseInt(pr);
-		        	String courseID = course_import.get("courseID");	
+		        	String cID = course_import.get("courseID");
+		        	char courseID = cID.charAt(0);
 	            	for( int i = 0 ; i < modulesID.length ; i++){
 			        	if (modulesID[i] == moduleID2){
 		            		c.addCourse(new Course(modules.get(i).getModuleID(), modules.get(i).getSemesterID(), modules.get(i).getName(), modules.get(i).getDuration(), modules.get(i).getHoursPerWeek(), modules.get(i).getGroup(), profesorID, courseID));

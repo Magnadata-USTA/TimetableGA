@@ -6,6 +6,7 @@ import java.security.AlgorithmConstraints;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 import DataLoading.DataReading;
 
@@ -68,15 +69,18 @@ public class GeneticAlgorithm {
 			System.out.println("duration="+duration+" hoursperweek="+hoursPerWeek+" numbertimeslots="+numberTimeslots);
 			
 			for ( int j = 0 ; j < numberTimeslots ; j++ ){
-				
+				System.out.println("VUELTA NUMERO "+j);
 				boolean doubling = true;				
-				while(doubling==true){
-				Gene available = findEmptyTimeslot(newPopulation, courses.get(i));								
-				doubling = newPopulation.checkTimeslotDoubling(available);
-				if(doubling == false)
-					{
-						newPopulation.addGene(available);
-					}
+				while(doubling == true){
+					Gene available = findEmptyTimeslot(newPopulation, courses.get(i));	
+					doubling = newPopulation.checkTimeslotDoubling(available);
+					System.out.println("VUELTA NUMERO " +" "+j+" "+i);
+					if(doubling == false)
+						{
+							newPopulation.addGene(available);
+							System.out.println(" ADDGENE ");
+							break;
+						}
 				}
 				
 				//break;
@@ -89,7 +93,13 @@ public class GeneticAlgorithm {
 		
 	}
 	
-		Gene findEmptyTimeslot (Chromosome newPopulation, Course course){
+	public static void pauseProg(){
+		System.out.println("Press enter to continue...");
+		Scanner keyboard = new Scanner(System.in);
+		keyboard.nextLine();
+		}
+	
+		Gene findEmptyTimeslot(Chromosome newPopulation, Course course){
 		boolean availability = false;
 		Gene testingGene = new Gene();
 		while(availability == false ){						
@@ -100,13 +110,15 @@ public class GeneticAlgorithm {
 				int startTime = (randomNumber.nextInt(Constraints.LATEST_TIME-Constraints.EARLIEST_TIME) + Constraints.EARLIEST_TIME);
 				if ( startTime%2 != 0 ){
 					startTime = startTime+1;
-				}System.out.println("random day = "+day+"random startime = "+startTime);
+				}
+				System.out.println("random day = "+day+"random startime = "+startTime);
 				testingGene = new Gene(course.getSemesterID(), course.getCourseID(), day, startTime, course.getModuleID());
 				availability = newPopulation.checkTimeslotAvailability(testingGene);
-				System.out.println("availability = "+availability);
 				if (availability == true){						
 					//newPopulation.addGene(testingGene);							
-					System.out.println(day +"  "+ startTime + "  "+availability);
+					//System.out.println(day +"  "+ startTime + "  "+availability);
+					//pauseProg();
+					return testingGene;
 				}
 				//break;
 		}
@@ -268,6 +280,7 @@ public class GeneticAlgorithm {
 	}
 	
 	
-*/	
-
+*/
 }
+
+

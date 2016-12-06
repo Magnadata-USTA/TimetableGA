@@ -23,6 +23,7 @@ public class DataReading{
 	        	int semesterID = Integer.parseInt(sID);
 	        	String cID = baseTimetable_import.get("courseID");
 	        	char courseID = cID.charAt(0);
+	        	/*_________________________________________________________________*/System.out.println(courseID);
 	        	String mID = baseTimetable_import.get("moduleID");
 	        	int moduleID = Integer.parseInt(mID);
 	        	String d = baseTimetable_import.get("day");
@@ -83,7 +84,9 @@ public class DataReading{
 		        	String pr = course_import.get("profesorID");
 		        	int profesorID = Integer.parseInt(pr);
 		        	String cID = course_import.get("courseID");
+		        	/*_________________________________________________________________*/System.out.println(" 1 "+cID);
 		        	char courseID = cID.charAt(0);
+		        	/*_________________________________________________________________*/System.out.println(" 2 "+courseID);
 	            	for( int i = 0 ; i < modulesID.length ; i++){
 			        	if (modulesID[i] == moduleID2){
 		            		c.addCourse(new Course(modules.get(i).getModuleID(), modules.get(i).getSemesterID(), modules.get(i).getName(), modules.get(i).getDuration(), modules.get(i).getHoursPerWeek(), modules.get(i).getGroup(), profesorID, courseID));

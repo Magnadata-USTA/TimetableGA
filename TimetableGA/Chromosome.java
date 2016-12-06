@@ -198,7 +198,7 @@ import DataLoading.*;
 	public boolean checkTimeslotAvailability(Gene gene){
  		int semesterID = gene.getSemesterID();
  		int moduleID = gene.getModuleID();
- 		int courseID = gene.getCourseID();
+ 		char courseID = gene.getCourseID();
  		int day = gene.getDay();
  		int startTime = gene.getStartTime();
  		
@@ -222,16 +222,20 @@ import DataLoading.*;
  	}
  	
 	public boolean checkTimeslotDoubling(Gene gene){
- 		int courseID = gene.getCourseID();
+ 		char courseID = gene.getCourseID();
  		int day = gene.getDay();
+ 		int moduleID = gene.getModuleID();
  		
  		for ( int i = 0 ; i < this.genes.size() ; i++ ){
- 			if ( day == this.genes.get(i).getDay() ){	
- 				if ( courseID == this.genes.get(i).getCourseID() ){
- 					return true;
-					}
-				}	
- 		}	
+ 			if ( moduleID == this.genes.get(i).getModuleID() ){
+	 			if ( day == this.genes.get(i).getDay() ){	
+	 				if ( courseID == this.genes.get(i).getCourseID() ){
+	 					//System.out.println("DOUBLING TRUE "+day+" "+this.genes.get(i).getDay()+" "+courseID+" "+this.genes.get(i).getCourseID());
+	 					return true;
+						}
+					}	
+	 			}
+ 			}
 		return false;
 	}
  	

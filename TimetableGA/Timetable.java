@@ -1,3 +1,4 @@
+package TimetableGA;
 import java.util.ArrayList;
 
 
@@ -8,7 +9,10 @@ public class Timetable {
 	
 	public Timetable(int semesterID, ArrayList<Timeslot> timeslots) {
 		this.semesterID = semesterID;
-		this.timeslots = timeslots;
+		//this.setTimeslots(timeslots);
 	}
+	
+
+
 
 }

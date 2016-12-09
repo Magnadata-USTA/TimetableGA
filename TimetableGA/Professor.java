@@ -33,4 +33,21 @@ public class Professor {
 	public ArrayList<Preference> getPreferences() {
 		return preferences;
 	}
+
+	public boolean checkProfessorAvailability(Gene gene){
+		int day = gene.getDay();
+		int starTime = gene.getStartTime();
+		int value = 2;
+
+		for ( int i = 0 ; i < this.preferences.size() ; i++ ){
+			if (day == this.preferences.get(i).getDay()){
+				if(starTime == this.preferences.get(i).getStartTime()){
+					if (value == this.preferences.get(i).getValue()){
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
 }

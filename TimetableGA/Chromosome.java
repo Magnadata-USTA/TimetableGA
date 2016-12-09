@@ -1,7 +1,6 @@
 package TimetableGA;
  
  import java.util.ArrayList;
-
 import DataLoading.*;
 
  public class Chromosome {
@@ -193,7 +192,7 @@ import DataLoading.*;
  // Check functions
  	
  	//check if a given timeslot is empty for assignment
- 	//return true if available or false if it´s not
+ 	//return true if available or false if itï¿½s not
  	
 	public boolean checkTimeslotAvailability(Gene gene){
  		int semesterID = gene.getSemesterID();
@@ -230,14 +229,30 @@ import DataLoading.*;
  			if ( moduleID == this.genes.get(i).getModuleID() ){
 	 			if ( day == this.genes.get(i).getDay() ){	
 	 				if ( courseID == this.genes.get(i).getCourseID() ){
-	 					//System.out.println("DOUBLING TRUE "+day+" "+this.genes.get(i).getDay()+" "+courseID+" "+this.genes.get(i).getCourseID());
 	 					return true;
-						}
-					}	
-	 			}
- 			}
+					}
+				}
+	 		}
+		}
 		return false;
 	}
+
+	 public boolean checkProfessorDoubling(Gene gene){
+		 int professorID = gene.getProfesorID();
+		 int day = gene.getDay();
+		 int startTime = gene.getStartTime();
+
+		 for ( int i = 0 ; i < this.genes.size() ; i++ ){
+			 if ( professorID == this.genes.get(i).getProfesorID()){
+				 if ( day == this.genes.get(i).getDay() ){
+					 if ( startTime == this.genes.get(i).getStartTime() ){
+						 return true;
+					 }
+				 }
+			 }
+		 }
+		 return false;
+	 }
  	
  	
  	

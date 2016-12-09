@@ -30,12 +30,9 @@ public class GeneticAlgorithm {
 		Faculty teleco = new Faculty();
 		DataReading baseTimetable = new DataReading();
 		baseChromosome = baseTimetable.loadChromosome();
-	    teleco = baseTimetable.loadModules();
-	    
+	    teleco = baseTimetable.loadData();
 	    //load initial population
 	    ga.initiatePopulation(10, baseChromosome, teleco);
-	    
-	    
 	    int fitness = baseChromosome.fitness();	
 	    System.out.println("Fitness value is = "+fitness);
 		ga.algorithm();
@@ -60,43 +57,58 @@ public class GeneticAlgorithm {
 		Chromosome newPopulation = new Chromosome();
 		newPopulation = baseChromosome; 		
 		ArrayList<Course> courses = faculty.getCourses();		
-		for ( int i = 0 ; i < courses.size() ;  i++){
+		for (int i = 0 ; i < courses.size() ;  i++){
 			System.out.println("VUELTA NUMERO "+i);
 			int duration = courses.get(i).getDuration();
 			int hoursPerWeek = courses.get(i).getHoursPerWeek();
 			int numberTimeslots = hoursPerWeek/duration;
 			System.out.println("duration="+duration+" hoursperweek="+hoursPerWeek+" numbertimeslots="+numberTimeslots);
 			
-			for ( int j = 0 ; j < numberTimeslots ; j++ ){
+			for (int j = 0 ; j < numberTimeslots ; j++ ){
 				System.out.println("VUELTA NUMERO "+j);
-				boolean doubling = true;				
-				while(doubling == true){
-					Gene available = findEmptyTimeslot(newPopulation, courses.get(i));	
-					doubling = newPopulation.checkTimeslotDoubling(available);
-					System.out.println("VUELTA NUMERO " +" "+j+" "+i);
-					if(doubling == false)
-						{
-							newPopulation.addGene(available);
-							System.out.println(" ADDGENE ");
-							break;
+				boolean doublingCourse = true;
+				boolean professorAvailable;
+				boolean doublingProfessor;
+
+				while(doublingCourse == true){
+					Gene available = findEmptyTimeslot(newPopulation, courses.get(i));
+					for (int k = 0 ; k < faculty.getProfessors().size() ; k++ ) {
+						if(faculty.getProfessors().get(k).getProfessorID() == courses.get(i).getProfesorID()) {
+							professorAvailable = faculty.getProfessors().get(k).checkProfessorAvailability(available);
+							if(professorAvailable == true) {
+								doublingCourse = newPopulation.checkTimeslotDoubling(available);
+								System.out.println("VUELTA NUMERO " + " " + i + " " + j);
+								if (doublingCourse == false) {
+									doublingProfessor = newPopulation.checkProfessorDoubling(available);
+									System.out.println(" doublingProfessor " + doublingProfessor);
+									if (doublingProfessor == false) {
+										newPopulation.addGene(available);
+										System.out.println(" ADDGENE ");
+										break;
+									} else {
+										doublingCourse = true;
+									}
+								}
+							}
+							else{
+								break;
+							}
 						}
+					}
 				}
-				
-				//break;
-				//System.out.println("break"+i+" "+j);
 			}
-			for( int ii = 1 ; ii <= Constraints.NUMBER_SEMESTERS ; ii++ ){
-		  		printOnScreen(newPopulation, ii);
-				System.out.println();}
-		}	
-		
+		}
+		for( int ii = 1 ; ii <= Constraints.NUMBER_SEMESTERS ; ii++ ){
+			printOnScreen(newPopulation, ii);
+			System.out.println();
+		}
 	}
 	
 	public static void pauseProg(){
 		System.out.println("Press enter to continue...");
 		Scanner keyboard = new Scanner(System.in);
 		keyboard.nextLine();
-		}
+	}
 	
 		Gene findEmptyTimeslot(Chromosome newPopulation, Course course){
 		boolean availability = false;
@@ -111,7 +123,7 @@ public class GeneticAlgorithm {
 					startTime = startTime+1;
 				}
 				System.out.println("random day = "+day+"random startime = "+startTime);
-				testingGene = new Gene(course.getSemesterID(), course.getCourseID(), day, startTime, course.getModuleID());
+				testingGene = new Gene(course.getSemesterID(), course.getModuleID(), course.getProfesorID(), course.getCourseID(), day, startTime);
 				availability = newPopulation.checkTimeslotAvailability(testingGene);
 				if (availability == true){						
 					//newPopulation.addGene(testingGene);							

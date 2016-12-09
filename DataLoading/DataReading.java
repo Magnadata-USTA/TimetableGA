@@ -21,15 +21,17 @@ public class DataReading{
 	        {
 	        	String sID = baseTimetable_import.get("semesterID");
 	        	int semesterID = Integer.parseInt(sID);
-	        	String cID = baseTimetable_import.get("courseID");
+				String mID = baseTimetable_import.get("moduleID");
+				int moduleID = Integer.parseInt(mID);
+				String pID = baseTimetable_import.get("professorID");
+				int professorID = Integer.parseInt(pID);
+				String cID = baseTimetable_import.get("courseID");
 	        	char courseID = cID.charAt(0);
-	        	String mID = baseTimetable_import.get("moduleID");
-	        	int moduleID = Integer.parseInt(mID);
 	        	String d = baseTimetable_import.get("day");
 	        	int day = Integer.parseInt(d);
 	        	String sT = baseTimetable_import.get("startTime");
 	        	int startTime = Integer.parseInt(sT);       	         
-	            c.addGene(new Gene(semesterID, courseID, day, startTime, moduleID)); 	            	        
+	            c.addGene(new Gene(semesterID, moduleID, professorID, courseID, day, startTime));
 	        }	         
 	        baseTimetable_import.close();	         
 	        } catch (FileNotFoundException e) {
@@ -40,7 +42,7 @@ public class DataReading{
 		return c;		
 	}
 	
-	public Faculty loadModules(){
+	public Faculty loadData(){
 		
 		Faculty c = new Faculty();
 		try {
@@ -128,7 +130,7 @@ public class DataReading{
 					Professor professor = professors.get(i);
 					if(professor.getProfessorID() == professorID){
 						c.getProfessors().get(i).addPreference(new Preference(day, startTime, value));
-						System.out.println(i + " "+ professor.getPreferences().size());
+						//System.out.println(i + " "+ professor.getPreferences().size());
 					}
 				}
 			}

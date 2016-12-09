@@ -15,7 +15,7 @@ public class DataReading{
 		
 		Chromosome c = new Chromosome();
 		try {        
-	        CsvReader baseTimetable_import = new CsvReader("D:\\Users\\lenovo\\Desktop\\Base Timetables.csv");
+	        CsvReader baseTimetable_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Base Timetables.csv");
 	        baseTimetable_import.readHeaders();	         
 	        while (baseTimetable_import.readRecord())
 	        {
@@ -23,7 +23,6 @@ public class DataReading{
 	        	int semesterID = Integer.parseInt(sID);
 	        	String cID = baseTimetable_import.get("courseID");
 	        	char courseID = cID.charAt(0);
-	        	/*_________________________________________________________________*/System.out.println(courseID);
 	        	String mID = baseTimetable_import.get("moduleID");
 	        	int moduleID = Integer.parseInt(mID);
 	        	String d = baseTimetable_import.get("day");
@@ -44,64 +43,105 @@ public class DataReading{
 	public Faculty loadModules(){
 		
 		Faculty c = new Faculty();
-		try {	        
-	        CsvReader module_import = new CsvReader("D:\\Users\\lenovo\\Desktop\\Modules.csv");	        
-	        module_import.readHeaders();
+		try {
+			
+			CsvReader modules_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Modules.csv");
+	        modules_import.readHeaders();
 	        
-	        CsvReader course_import = new CsvReader("D:\\Users\\lenovo\\Desktop\\Courses.csv");
-	        course_import.readHeaders();
+	        CsvReader courses_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Courses.csv");
+	        courses_import.readHeaders();
 
-	        while (module_import.readRecord())
+			CsvReader preferences_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Preferences.csv");
+			preferences_import.readHeaders();
+
+			CsvReader professors_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Professors.csv");
+			professors_import.readHeaders();
+
+			while (professors_import.readRecord())
+			{
+				String pID = professors_import.get("professorID");
+				int professorID = Integer.parseInt(pID);
+				c.addProfessor(new Professor(professorID));
+			}
+
+			ArrayList<Professor> professors =  c.getProfessors();
+
+	        while (modules_import.readRecord())
 	        {
-	        	String mID = module_import.get("moduleID");
+	        	String mID = modules_import.get("moduleID");
 	        	int moduleID = Integer.parseInt(mID);
-	        	String sID = module_import.get("semesterID");
+	        	String sID = modules_import.get("semesterID");
 	        	int semesterID = Integer.parseInt(sID);
-	        	String name = module_import.get("name");
-	        	String du = module_import.get("duration");
+	        	String name = modules_import.get("name");
+	        	String du = modules_import.get("duration");
 	        	int duration = Integer.parseInt(du);
-	        	String hpw = module_import.get("hoursPerWeek");
+	        	String hpw = modules_import.get("hoursPerWeek");
 	        	int hoursPerWeek = Integer.parseInt(hpw);
-	        	String group = module_import.get("group"); 
-	        	System.out.println("VERIFICACION DELL GRUPO"+group);
+	        	String group = modules_import.get("group");
 	        	c.addModule(new Module(moduleID, semesterID, name, duration, hoursPerWeek, group));
-	        	
 	        }
-	        
-	        		           
-	        	ArrayList<Module> modules = c.getModules();
-	        	int [] modulesID = new int[modules.size()];
-	        	for(int i = 0 ; i < modules.size() ; i++){
-	        		modulesID[i] = modules.get(i).getModuleID();
-	        	}
-	        	System.out.println("prueba");
-	        	
-	        	while(course_import.readRecord())
-	        	{
-		        	String mID2 = course_import.get("moduleID2");
-		        	int moduleID2 = Integer.parseInt(mID2);
-		        	//System.out.println(moduleID2);
-		        	String pr = course_import.get("profesorID");
-		        	int profesorID = Integer.parseInt(pr);
-		        	String cID = course_import.get("courseID");
-		        	/*_________________________________________________________________*/System.out.println(" 1 "+cID);
-		        	char courseID = cID.charAt(0);
-		        	/*_________________________________________________________________*/System.out.println(" 2 "+courseID);
-	            	for( int i = 0 ; i < modulesID.length ; i++){
-			        	if (modulesID[i] == moduleID2){
-		            		c.addCourse(new Course(modules.get(i).getModuleID(), modules.get(i).getSemesterID(), modules.get(i).getName(), modules.get(i).getDuration(), modules.get(i).getHoursPerWeek(), modules.get(i).getGroup(), profesorID, courseID));
-		            		//System.out.println(moduleID2 + " "+ courseID);	
-		            		break;
-		            	}	
-			        }		        
-	        	}
-	        	        
-	        System.out.println();
-	        module_import.close();	        
-	        } catch (FileNotFoundException e) {
+
+			System.out.println();
+
+			ArrayList<Module> modules = c.getModules();
+			while(courses_import.readRecord())
+			{
+				String mID = courses_import.get("moduleID");
+				int moduleID = Integer.parseInt(mID);
+				String pID = courses_import.get("professorID");
+				int professorID = Integer.parseInt(pID);
+				String cID = courses_import.get("courseID");
+				char courseID = cID.charAt(0);
+				for(int i = 0 ; i < modules.size() ; i++) {
+					if(modules.get(i).getModuleID() == moduleID) {
+						c.addCourse(new Course(modules.get(i).getModuleID(), modules.get(i).getSemesterID(), modules.get(i).getName(), modules.get(i).getDuration(), modules.get(i).getHoursPerWeek(), modules.get(i).getGroup(), professorID, courseID));
+						for(int j = 0 ; j < professors.size() ; j++) {
+							if(professors.get(j).getProfessorID() == professorID){
+								if(professors.get(j).getModules().size() == 0){
+									professors.get(j).addModule(new Module(moduleID, modules.get(i).getSemesterID(), modules.get(i).getName(), modules.get(i).getDuration(), modules.get(i).getHoursPerWeek(), modules.get(i).getGroup()));
+									//System.out.println(moduleID + " "+ professorID+" " +courseID);
+								}
+								for (int k = 0; k < professors.get(j).getModules().size(); k++) {
+									if(professors.get(j).getModules().get(k).getModuleID() != moduleID) {
+										professors.get(j).addModule(new Module(moduleID, modules.get(i).getSemesterID(), modules.get(i).getName(), modules.get(i).getDuration(), modules.get(i).getHoursPerWeek(), modules.get(i).getGroup()));
+										//System.out.println(moduleID + " "+ professorID+" " +courseID);
+									}
+								}
+							}
+						}
+						break;
+					}
+				}
+			}
+
+			while (preferences_import.readRecord())
+			{
+				String pID = preferences_import.get("professorID");
+				int professorID = Integer.parseInt(pID);
+				String d = preferences_import.get("day");
+				int day = Integer.parseInt(d);
+				String sT = preferences_import.get("startTime");
+				int startTime = Integer.parseInt(sT);
+				String v = preferences_import.get("value");
+				int value = Integer.parseInt(v);
+				for(int i = 0 ; i < professors.size() ; i++){
+					Professor professor = professors.get(i);
+					if(professor.getProfessorID() == professorID){
+						c.getProfessors().get(i).addPreference(new Preference(day, startTime, value));
+						System.out.println(i + " "+ professor.getPreferences().size());
+					}
+				}
+			}
+			modules_import.close();
+			courses_import.close();
+			preferences_import.close();
+			professors_import.close();
+
+			} catch (FileNotFoundException e) {
 	            e.printStackTrace();
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
 		return c;
-		}}
+		}
+}

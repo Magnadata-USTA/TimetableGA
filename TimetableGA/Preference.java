@@ -11,9 +11,9 @@ public class Preference {
 	private int value;
 	
 	public Preference(int day, int startTime, int value) {
-		this.setDay(day);
-		this.setStartTime(startTime);
-		this.setValue(0);
+		this.day = day;
+		this.startTime = startTime;
+		this.value = value;
 	}
 
 	public int getDay() {

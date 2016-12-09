@@ -5,18 +5,17 @@ public class Timeslot {
 	private int semesterID;
 	private int moduleID;
 	private int profesorID;
-	private char groupID;
+	private char courseID;
 	private int day;
 	private int startTime;
 	private int endTime;
 	
 	
-public Timeslot(int semesterID, int moduleID, int profesorID, char groupID, int day, int startTime, int endTime) {
-
+public Timeslot(int semesterID, int moduleID, int profesorID, char courseID, int day, int startTime, int endTime) {
 	this.setSemesterID(semesterID);
 	this.setModuleID(moduleID);
 	this.setProfesorID(profesorID);
-	this.setGroupID(groupID);
+	this.setcourseID(courseID);
 	this.setDay(day);
 	this.setStartTime(startTime);
 	this.setEndTime(endTime);
@@ -46,12 +45,12 @@ public void setProfesorID(int profesorID) {
 	this.profesorID = profesorID;
 }
 
-public char getGroupID() {
-	return groupID;
+public char getcourseID() {
+	return courseID;
 }
 
-public void setGroupID(char groupID) {
-	this.groupID = groupID;
+public void setcourseID(char courseID) {
+	this.courseID = courseID;
 }
 
 public int getDay() {

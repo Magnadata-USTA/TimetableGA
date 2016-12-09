@@ -11,8 +11,4 @@ public class Timetable {
 		this.semesterID = semesterID;
 		//this.setTimeslots(timeslots);
 	}
-	
-
-
-
 }

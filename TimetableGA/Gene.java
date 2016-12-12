@@ -12,8 +12,7 @@ public class Gene {
 	
 	public Gene(){}
 	
-	public Gene(int semesterID, int moduleID,  int profesorID, char courseID, int day, int startTime/*int endTime,*/) {
-		//semesterID, day, startTime, moduleID)
+	public Gene(int semesterID, int moduleID,  int profesorID, char courseID, int day, int startTime) {
 		this.semesterID = semesterID;
 		this.moduleID = moduleID;
 		this.profesorID = profesorID;

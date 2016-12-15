@@ -36,6 +36,7 @@ package TimetableGA;
  		for( int i = 1 ; i <= Constraints.NUMBER_SEMESTERS ; i++ ){
  			deadTimeValue = deadTimeValue + deadTime(i);
  			int lunchTime = hourCheck(i, Constraints.LUNCH_TIME);
+			System.out.println(i+ " " +lunchTime);
 			hourCheckValue = hourCheckValue + lunchTime;
  		}
  		fitness = deadTimeValue+hourCheckValue;
@@ -153,15 +154,12 @@ package TimetableGA;
  		return timetableValue;
  	}
  	
- 	int hourCheck(int semesterID , int hour){
+ 	int hourCheck(int semester , int hour){
  		int hourcheckValue = 0;
  		for (int i = 0 ; i < genes.size() ; i++) {
- 			int semester;
- 			int startTime;
- 			startTime = this.genes.get(i).getStartTime();
- 			semester = this.genes.get(i).getSemesterID();
- 			if (semesterID == semester && startTime == hour){
- 				hourcheckValue = hourcheckValue+1;
+ 			if (semester == this.genes.get(i).getSemesterID() && hour == this.genes.get(i).getStartTime()){
+ 				hourcheckValue++;
+				System.out.println(semester+ " " + this.genes.get(i).getDay()+ " " +hour + " " + hourcheckValue);
  			}
  		}
  		return hourcheckValue;

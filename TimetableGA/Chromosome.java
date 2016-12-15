@@ -159,7 +159,6 @@ package TimetableGA;
  		for (int i = 0 ; i < genes.size() ; i++) {
  			if (semester == this.genes.get(i).getSemesterID() && hour == this.genes.get(i).getStartTime()){
  				hourcheckValue++;
-				System.out.println(semester+ " " + this.genes.get(i).getDay()+ " " +hour + " " + hourcheckValue);
  			}
  		}
  		return hourcheckValue;
@@ -195,19 +194,14 @@ package TimetableGA;
  		
  		for ( int i = 0 ; i < this.genes.size() ; i++ ){
  			if ( semesterID == this.genes.get(i).getSemesterID() ){
- 				if ( moduleID == this.genes.get(i).getModuleID() ){
- 					if ( courseID == this.genes.get(i).getCourseID() ){
- 						if ( day == this.genes.get(i).getDay() ){
- 							if ( startTime == this.genes.get(i).getStartTime() ){
- 								//System.out.println("boolean check true");
- 								return false;
- 							}
- 						}
- 					}
- 					
- 				}
- 			}
- 		}
+				if ( day == this.genes.get(i).getDay() ){
+					if ( startTime == this.genes.get(i).getStartTime() ){
+						//System.out.println("boolean check true");
+						return false;
+					}
+				}
+			}
+		}
  		//System.out.println("boolean check false");
  		return true; 
  	}

@@ -3,9 +3,7 @@ package DataLoading;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
-import TimetableGA.*;
+import Model.*;
 
 import com.csvreader.CsvReader; 
 

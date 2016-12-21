@@ -280,6 +280,7 @@ public class Chromosome implements Cloneable{
 
 	 //Check chromosome validity
 	 public boolean checkValidity(){
+		 //Check if the number of timeslots of all courses is correct
 		 return true;
 	 }
 

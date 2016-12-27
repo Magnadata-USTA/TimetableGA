@@ -17,16 +17,6 @@ public class SystemGA {
 
     }
 
-    //Compute average fitness value
-    public void averageFitness(ArrayList<Chromosome> chromosomes){
-
-    }
-
-    //Find the best fitness value
-    public void bestFitness(ArrayList<Chromosome> chromosomes){
-
-    }
-
     public static void pause(){
         java.lang.System.out.println("Press enter to continue...");
         Scanner keyboard = new Scanner(System.in);

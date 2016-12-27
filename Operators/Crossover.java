@@ -9,5 +9,5 @@ import java.util.ArrayList;
  */
 public abstract class Crossover {
 
-    abstract ArrayList<Chromosome> crossPopulation(Chromosome cromosome);
+    abstract ArrayList<Chromosome> crossPopulation(Chromosome chromosome);
 }

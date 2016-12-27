@@ -1,6 +1,6 @@
 package Operators;
 
-import Model.Chromosome;
+import Model.Population;
 
 import java.util.ArrayList;
 
@@ -9,5 +9,5 @@ import java.util.ArrayList;
  */
 public abstract class Mutation {
 
-    abstract ArrayList<Chromosome> mutatePopulation(Chromosome cromosome);
+    abstract Population mutatePopulation(Population population, double probabilityOfMutation, double  percentageOfGenes);
 }

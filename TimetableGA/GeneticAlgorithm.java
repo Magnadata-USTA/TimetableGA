@@ -1,7 +1,5 @@
 package TimetableGA;
 
-import java.util.ArrayList;
-
 import Model.*;
 import Operators.*;
 
@@ -9,21 +7,13 @@ import DataLoading.DataReading;
 
 public class GeneticAlgorithm {
 	private DataReading input;
-	private ArrayList<Chromosome> chromosomes;
+	private Population population;
 	private int numGenerations;
 	private int sizeElite;
 
-	public ArrayList<Chromosome> getChromosomes() {
-		return chromosomes;
-	}
-
-	public void setChromosomes(ArrayList<Chromosome> chromosomes) {
-		this.chromosomes = chromosomes;
-	}
-
 	public GeneticAlgorithm(DataReading input, int sizeElite, int numGenerations){
 		this.input = input;
-		this.chromosomes = new ArrayList<>();
+		this.population = new Population();
 		this.sizeElite = sizeElite;
 		this.numGenerations = numGenerations;
 	}
@@ -37,11 +27,21 @@ public class GeneticAlgorithm {
 		int fitness = baseChromosome.getFitness();
 		System.out.println("Fitness value initial is = "+fitness);
 
-		//Reproduction
-		RandomPopulationReproduction r = new RandomPopulationReproduction();
-		this.setChromosomes(r.initiatePopulation(10, baseChromosome, faculty));
+		//Population p = new Population();
+		//Generation
+		RandomPopulationGeneration r = new RandomPopulationGeneration();
+		BestRandomPopulationGeneration rb = new BestRandomPopulationGeneration();
+		population = r.initiatePopulation(100, baseChromosome, faculty);
+		//population = rb.initiatePopulation(5, baseChromosome, faculty);
+		System.out.println(population.getFitnessAverage());
+		System.out.println(population.getFitnessStandardDeviation());
+		System.out.println(population.getBestFitness());
+		System.out.println(population.getWorseFitness());
 
 		//Mutation and Crossover
+		SwapGenesVerticallyMutation m = new SwapGenesVerticallyMutation();
+		population = m.mutatePopulation(population, 0.03, 0.8);
+		System.out.println(population.getChromosomes().size());
 
 		return baseChromosome;
 	}

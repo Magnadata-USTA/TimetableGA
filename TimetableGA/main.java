@@ -1,9 +1,6 @@
 package TimetableGA;
 
 import DataLoading.DataReading;
-import Model.Chromosome;
-import Model.Faculty;
-import Operators.RandomPopulationReproduction;
 
 /**
  * Created by Felipe on 19/12/2016.

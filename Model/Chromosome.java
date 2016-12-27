@@ -278,6 +278,39 @@ public class Chromosome implements Cloneable{
 		 return false;
 	 }
 
+	 public boolean hardConstraintsViolation(Course course, Faculty faculty, Chromosome chromosome, Gene gene){
+		 boolean doublingCourse;
+		 boolean professorAvailable;
+		 boolean doublingProfessor;
+		 boolean facultyAvailable;
+
+		 for (int k = 0; k < faculty.getProfessors().size(); k++) {
+			 if (faculty.getProfessors().get(k).getProfessorID() == course.getProfesorID()) {
+				 professorAvailable = faculty.getProfessors().get(k).checkProfessorAvailability(gene);
+				 if (professorAvailable == true) {
+					 doublingCourse = chromosome.checkTimeslotDoubling(gene);
+					 if (doublingCourse == false) {
+						 doublingProfessor = chromosome.checkProfessorDoubling(gene);
+						 if (doublingProfessor == false) {
+							 facultyAvailable = faculty.checkFacultyAvailability(gene);
+							 if (facultyAvailable == true) {
+								 return false;
+							 } else{
+								return true;
+							 }
+						 } else {
+							 return true;
+						 }
+					 } else{
+						 return true;
+					 }
+				 } else {
+					 return true;
+				 }
+			 }
+		 }
+		 return true;
+	 }
 	 //Check chromosome validity
 	 public boolean checkValidity(){
 		 //Check if the number of timeslots of all courses is correct

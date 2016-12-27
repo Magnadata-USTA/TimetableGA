@@ -51,8 +51,11 @@ public class DataReading{
 	        CsvReader courses_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Courses.csv");
 	        courses_import.readHeaders();
 
-			CsvReader preferences_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Preferences.csv");
-			preferences_import.readHeaders();
+			CsvReader preferencesProfessors_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\PreferencesProfessors.csv");
+			preferencesProfessors_import.readHeaders();
+
+			CsvReader preferencesFaculty_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\PreferencesFaculty.csv");
+			preferencesFaculty_import.readHeaders();
 
 			CsvReader professors_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Professors.csv");
 			professors_import.readHeaders();
@@ -114,15 +117,15 @@ public class DataReading{
 				}
 			}
 
-			while (preferences_import.readRecord())
+			while (preferencesProfessors_import.readRecord())
 			{
-				String pID = preferences_import.get("professorID");
+				String pID = preferencesProfessors_import.get("professorID");
 				int professorID = Integer.parseInt(pID);
-				String d = preferences_import.get("day");
+				String d = preferencesProfessors_import.get("day");
 				int day = Integer.parseInt(d);
-				String sT = preferences_import.get("startTime");
+				String sT = preferencesProfessors_import.get("startTime");
 				int startTime = Integer.parseInt(sT);
-				String v = preferences_import.get("value");
+				String v = preferencesProfessors_import.get("value");
 				int value = Integer.parseInt(v);
 				for(int i = 0 ; i < professors.size() ; i++){
 					Professor professor = professors.get(i);
@@ -132,9 +135,23 @@ public class DataReading{
 					}
 				}
 			}
+
+			while (preferencesFaculty_import.readRecord())
+			{
+				String d = preferencesFaculty_import.get("day");
+				int day = Integer.parseInt(d);
+				String sT = preferencesFaculty_import.get("startTime");
+				int startTime = Integer.parseInt(sT);
+				String v = preferencesFaculty_import.get("value");
+				int value = Integer.parseInt(v);
+				c.addPreference(new Preference(day, startTime, value));
+				//System.out.println(c.getPreferences().size());
+			}
+
 			modules_import.close();
 			courses_import.close();
-			preferences_import.close();
+			preferencesProfessors_import.close();
+			preferencesFaculty_import.close();
 			professors_import.close();
 
 			} catch (FileNotFoundException e) {

@@ -107,7 +107,7 @@ public class Population implements Cloneable{
             System.out.println("Bad chromosome. Number of timeslots is different.");
         }
         if(numberEvents == chromosome1.getGenes().size()){
-            System.out.println(numberEvents + " " + chromosome1.getGenes().size());
+            //System.out.println(numberEvents + " " + chromosome1.getGenes().size());
             return true;
         } else {
             return false;

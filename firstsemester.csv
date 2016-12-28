@@ -1,4 +1,4 @@
-moduleID, profesorID, groupID, day, startTime, endTime
+moduleID, professorID, groupID, day, startTime, endTime
 96110,51350111, 'A', 1, 6, 8
 96110,51350111, 'A', 3, 8, 10
 96110,51350111, 'A', 4, 10, 12

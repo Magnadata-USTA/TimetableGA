@@ -3,6 +3,7 @@ package Utils;
 import Model.Chromosome;
 import Model.Constraints;
 import Model.Gene;
+import Model.Population;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -17,8 +18,14 @@ public class SystemGA {
 
     }
 
+    public static void printFitness(Population population){
+        for (int i = 0; i < population.getChromosomes().size(); i++){
+            System.out.println("Fitness chromosome" + i + " : " + population.getChromosomes().get(i).getFitness());
+        }
+    }
+
     public static void pause(){
-        java.lang.System.out.println("Press enter to continue...");
+        System.out.println("Press enter to continue...");
         Scanner keyboard = new Scanner(System.in);
         keyboard.nextLine();
     }

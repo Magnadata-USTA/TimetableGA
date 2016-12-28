@@ -3,7 +3,6 @@ package Model;
  import Utils.*;
 
  import java.util.ArrayList;
- import java.util.Random;
 
 public class Chromosome implements Cloneable{
  
@@ -36,8 +35,8 @@ public class Chromosome implements Cloneable{
 
 	public Chromosome clone(){
 		Chromosome chromosome = new Chromosome();
-		for ( int i = 0 ; i < genes.size() ; i++ ) {
-			chromosome.addGene(genes.get(i));
+		for ( int i = 0 ; i < this.genes.size() ; i++ ) {
+			chromosome.addGene(this.genes.get(i).clone());
 		}
 		return chromosome;
 	}
@@ -74,7 +73,7 @@ public class Chromosome implements Cloneable{
 		int preferencesValue = 0;
 		for ( int i = 0 ; i < genes.size() ; i++ ) {
 			for ( int j = 0 ; j < faculty.getProfessors().size() ; j++ ) {
-				if(genes.get(i).getProfesorID() == faculty.getProfessors().get(j).getProfessorID()){
+				if(genes.get(i).getProfessorID() == faculty.getProfessors().get(j).getProfessorID()){
 					for ( int k = 0 ; k < faculty.getProfessors().get(j).getPreferences().size() ; k++ ) {
 						if (genes.get(i).getDay() == faculty.getProfessors().get(j).getPreferences().get(k).getDay()) {
 							if (genes.get(i).getStartTime() == faculty.getProfessors().get(j).getPreferences().get(k).getStartTime()) {
@@ -90,7 +89,7 @@ public class Chromosome implements Cloneable{
 	}
  	
  	int deadTime(int semesterID){
- 		//This method analyzes the timetables and says how many free timeslots are between classes
+ 		//This method analyzes the timetables and returns how many free timeslots are between classes
  		int numDays = Constraints.DAY_MAX;
  		int numTimeslots = ((Constraints.HR_MAX-Constraints.EARLIEST_TIME)/2);
  		Gene [][] genesSemester = new Gene[numTimeslots][numDays];
@@ -223,22 +222,23 @@ public class Chromosome implements Cloneable{
 	}
 
 	public boolean checkTimeslotAvailability(Gene gene){
- 		int semesterID = gene.getSemesterID();
- 		int moduleID = gene.getModuleID();
- 		char courseID = gene.getCourseID();
- 		int day = gene.getDay();
- 		int startTime = gene.getStartTime();
- 		
- 		for ( int i = 0 ; i < this.genes.size() ; i++ ){
- 			if ( semesterID == this.genes.get(i).getSemesterID() ){
-				if ( day == this.genes.get(i).getDay() ){
-					if ( startTime == this.genes.get(i).getStartTime() ){
+		int semesterID = gene.getSemesterID();
+		int moduleID = gene.getModuleID();
+		char courseID = gene.getCourseID();
+		int day = gene.getDay();
+		int startTime = gene.getStartTime();
+
+		for (int i = 0; i < this.genes.size(); i++) {
+			if (semesterID == this.genes.get(i).getSemesterID()) {
+				if (day == this.genes.get(i).getDay()) {
+					if (startTime == this.genes.get(i).getStartTime()) {
 						//System.out.println("boolean check true");
 						return false;
 					}
 				}
 			}
 		}
+
  		//System.out.println("boolean check false");
  		return true; 
  	}
@@ -261,12 +261,12 @@ public class Chromosome implements Cloneable{
 	}
 
 	 public boolean checkProfessorDoubling(Gene gene){
-		 int professorID = gene.getProfesorID();
+		 int professorID = gene.getProfessorID();
 		 int day = gene.getDay();
 		 int startTime = gene.getStartTime();
 
 		 for ( int i = 0 ; i < this.genes.size() ; i++ ){
-			 if ( professorID == this.genes.get(i).getProfesorID()){
+			 if ( professorID == this.genes.get(i).getProfessorID()){
 				 if ( day == this.genes.get(i).getDay() ){
 					 if ( startTime == this.genes.get(i).getStartTime() ){
 						 return true;

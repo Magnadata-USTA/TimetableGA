@@ -33,8 +33,8 @@ public class RandomPopulationGeneration extends Generation {
             }
             population.addChromosome(newChromosome);
             newChromosome.setFitness(faculty);
-            int fitness = newChromosome.getFitness();
-            System.out.println("Fitness value new is = "+fitness);
+            //int fitness = newChromosome.getFitness();
+            //System.out.println("Fitness value new is = "+fitness);
 			//SystemGA.printOnScreen(newChromosome);
 			//SystemGA.pause();
         }

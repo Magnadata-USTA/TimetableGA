@@ -39,10 +39,13 @@ public class GeneticAlgorithm {
 		System.out.println(population.getFitnessStandardDeviation());
 		System.out.println(population.getBestFitness());
 		System.out.println(population.getWorseFitness());
+		SystemGA.printFitness(population);
 
 		//Mutation and Crossover
-		VerticalMutation m = new VerticalMutation();
-		population = m.mutatePopulation(population, 1, 1, faculty);
+		VerticalMutation v = new VerticalMutation();
+		HorizontalMutation h = new HorizontalMutation();
+		//population = v.mutatePopulation(population, 1, 1, faculty);
+		population = h.mutatePopulation(population, 1, 1, faculty);
 		//SystemGA.printOnScreen(population.getChromosomes().get(0));
 		//SystemGA.pause();
 		System.out.println(population.getChromosomes().size());
@@ -50,6 +53,7 @@ public class GeneticAlgorithm {
 		System.out.println(population.getFitnessStandardDeviation());
 		System.out.println(population.getBestFitness());
 		System.out.println(population.getWorseFitness());
+		SystemGA.printFitness(population);
 
 		return baseChromosome;
 	}

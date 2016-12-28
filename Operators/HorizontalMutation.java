@@ -6,9 +6,9 @@ import Utils.SystemGA;
 import java.util.ArrayList;
 
 /**
- * Created by Felipe on 27/12/2016.
+ * Created by Felipe on 28/12/2016.
  */
-public class VerticalMutation extends Mutation {
+public class HorizontalMutation extends Mutation {
 
     public Population mutatePopulation(Population population, double probabilityCM, double probabilityGM, Faculty faculty){
         Population futurePopulation = new Population();
@@ -17,13 +17,16 @@ public class VerticalMutation extends Mutation {
                 Chromosome oldChromosome = population.getChromosomes().get(i).clone();
                 Chromosome mutatedChromosome = mutateChromosome(oldChromosome, faculty, probabilityGM);
                 //oldChromosome.setFitness(faculty);
-                if (futurePopulation.equals(population.getChromosomes().get(i), mutatedChromosome)){
+                if (futurePopulation.equals(population.getChromosomes().get(i), mutatedChromosome) == true){
                     futurePopulation.addChromosome(mutatedChromosome);
                     //System.out.println("Old chromosome");
                 } else {
                     //System.out.println("New chromosome");
                     futurePopulation.addChromosome(population.getChromosomes().get(i));
+                    //SystemGA.printOnScreen(population.getChromosomes().get(i));
                     futurePopulation.addChromosome(mutatedChromosome);
+                    //SystemGA.printOnScreen(mutatedChromosome);
+                    //SystemGA.pause();
                 }
             }
         }
@@ -41,21 +44,21 @@ public class VerticalMutation extends Mutation {
                             Gene gene = chromosome.getGenes().get(j).clone();
                             //Delete gene to avoid doublingCourse hardConstraintsViolation
                             if(mutatedChromosome.removeGene(gene)) {
-                                int newStartTime = gene.getStartTime();
+                                int newDay = gene.getDay();
                                 if (Math.random() < 0.5) {
-                                    //Move vertically down
-                                    newStartTime += Constraints.EVENT_DURATION;
+                                    //Move horizontally right (next day)
+                                    newDay += 1;
                                 } else {
-                                    //Move vertically up
-                                    newStartTime -= Constraints.EVENT_DURATION;
+                                    //Move horizontally left (day before)
+                                    newDay -= 1;
                                 }
-                                gene.setStartTime(newStartTime);
+                                gene.setDay(newDay);
                                 //System.out.println(gene.getModuleID() + " " + gene.getCourseID() + " " + gene.getSemesterID() + " " + gene.getDay() + " " + gene.getStartTime());
                                 //SystemGA.printOnScreen(mutatedChromosome);
                                 //SystemGA.pause();
                                 if (mutatedChromosome.checkTimeslotAvailability(gene)) {
                                     if (!mutatedChromosome.hardConstraintsViolation(courses.get(k), faculty, gene)) {
-                                        chromosome.getGenes().get(j).setStartTime(newStartTime);
+                                        chromosome.getGenes().get(j).setDay(newDay);
                                         //System.out.println(gene.getModuleID() + " " + gene.getCourseID() + " " + gene.getSemesterID() + " " + gene.getDay() + " " + gene.getStartTime());
                                         //SystemGA.pause();
                                     }

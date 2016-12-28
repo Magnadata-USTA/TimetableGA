@@ -4,33 +4,31 @@ public class Gene implements Cloneable{
 	
 	private int semesterID;
 	private int moduleID;
-	private int profesorID;
+	private int professorID;
 	private char courseID;
 	private int day;
 	private int startTime;
-	private int endTime;
-	
+
 	public Gene() {}
 
 	public Gene clone(){
 		Gene gene = new Gene();
 		gene.setSemesterID(this.semesterID);
 		gene.setModuleID(this.moduleID);
-		gene.setProfesorID(this.profesorID);
+		gene.setProfessorID(this.professorID);
 		gene.setCourseID(this.courseID);
 		gene.setDay(this.day);
 		gene.setStartTime(this.startTime);
 		return gene;
 	}
 	
-	public Gene(int semesterID, int moduleID,  int profesorID, char courseID, int day, int startTime) {
+	public Gene(int semesterID, int moduleID,  int professorID, char courseID, int day, int startTime) {
 		this.semesterID = semesterID;
 		this.moduleID = moduleID;
-		this.profesorID = profesorID;
+		this.professorID = professorID;
 		this.courseID = courseID;
 		this.day = day;
 		this.startTime = startTime;
-		this.endTime = endTime;
 	}
 
 	public int getSemesterID(){
@@ -57,20 +55,17 @@ public class Gene implements Cloneable{
 	public void setModuleID(int moduleID) {
 		this.moduleID = moduleID;
 	}
-	public int getProfesorID() {
-		return profesorID;
+	public int getProfessorID() {
+		return professorID;
 	}
-	public void setProfesorID(int profesorID) {
-		this.profesorID = profesorID;
+	public void setProfessorID(int professorID) {
+		this.professorID = professorID;
 	}
 	public char getCourseID() {
 		return courseID;
 	}
 	public void setCourseID(char courseID) {
 		this.courseID = courseID;
-	}
-	public int getEndTime() {
-		return endTime;
 	}
 
 	public boolean checkGeneValidity(){

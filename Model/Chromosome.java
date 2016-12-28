@@ -8,6 +8,7 @@ package Model;
 public class Chromosome implements Cloneable{
  
  	private ArrayList<Gene> genes;
+	private int fitness;
 
 	public int getFitness() {
 		return fitness;
@@ -28,8 +29,6 @@ public class Chromosome implements Cloneable{
 		this.fitness = deadTimeValue + hourCheckValue + professorsFitness;
 		//System.out.println(deadTimeValue + " " + hourCheckValue + " " + professorsFitness);
 	}
-
-	private int fitness;
  	
  	public Chromosome() {
  		this.genes = new ArrayList<Gene>();
@@ -38,7 +37,7 @@ public class Chromosome implements Cloneable{
 	public Chromosome clone(){
 		Chromosome chromosome = new Chromosome();
 		for ( int i = 0 ; i < genes.size() ; i++ ) {
-			chromosome.genes.add(genes.get(i));
+			chromosome.addGene(genes.get(i));
 		}
 		return chromosome;
 	}
@@ -222,7 +221,7 @@ public class Chromosome implements Cloneable{
 		}
 		return gene;
 	}
- 	
+
 	public boolean checkTimeslotAvailability(Gene gene){
  		int semesterID = gene.getSemesterID();
  		int moduleID = gene.getModuleID();
@@ -244,7 +243,7 @@ public class Chromosome implements Cloneable{
  		return true; 
  	}
 
-	 public boolean checkTimeslotDoubling(Gene gene){
+ 	public boolean checkTimeslotDoubling(Gene gene){
  		char courseID = gene.getCourseID();
  		int day = gene.getDay();
  		int moduleID = gene.getModuleID();
@@ -278,39 +277,68 @@ public class Chromosome implements Cloneable{
 		 return false;
 	 }
 
-	 public boolean hardConstraintsViolation(Course course, Faculty faculty, Chromosome chromosome, Gene gene){
+	 public boolean hardConstraintsViolation(Course course, Faculty faculty, Gene gene){
 		 boolean doublingCourse;
 		 boolean professorAvailable;
 		 boolean doublingProfessor;
 		 boolean facultyAvailable;
 
-		 for (int k = 0; k < faculty.getProfessors().size(); k++) {
-			 if (faculty.getProfessors().get(k).getProfessorID() == course.getProfesorID()) {
-				 professorAvailable = faculty.getProfessors().get(k).checkProfessorAvailability(gene);
-				 if (professorAvailable == true) {
-					 doublingCourse = chromosome.checkTimeslotDoubling(gene);
-					 if (doublingCourse == false) {
-						 doublingProfessor = chromosome.checkProfessorDoubling(gene);
-						 if (doublingProfessor == false) {
-							 facultyAvailable = faculty.checkFacultyAvailability(gene);
-							 if (facultyAvailable == true) {
-								 return false;
-							 } else{
-								return true;
+		 if (gene.checkGeneValidity() == true) {
+			 //System.out.println(gene.checkGeneValidity());
+			 for (int k = 0; k < faculty.getProfessors().size(); k++) {
+				 if (faculty.getProfessors().get(k).getProfessorID() == course.getProfesorID()) {
+					 professorAvailable = faculty.getProfessors().get(k).checkProfessorAvailability(gene);
+					 if (professorAvailable == true) {
+						 doublingCourse = this.checkTimeslotDoubling(gene);
+						 if (doublingCourse == false) {
+							 doublingProfessor = this.checkProfessorDoubling(gene);
+							 if (doublingProfessor == false) {
+								 facultyAvailable = faculty.checkFacultyAvailability(gene);
+								 if (facultyAvailable == true) {
+									 return false;
+								 } else {
+									 return true;
+								 }
+							 } else {
+								 return true;
 							 }
 						 } else {
 							 return true;
 						 }
-					 } else{
+					 } else {
 						 return true;
 					 }
-				 } else {
-					 return true;
 				 }
 			 }
+		 } else{
+			 return true;
 		 }
 		 return true;
 	 }
+
+	 public boolean removeGene(Gene gene){
+		 int moduleID = gene.getModuleID();
+		 int courseID = gene.getCourseID();
+		 int semesterID = gene.getSemesterID();
+		 int day = gene.getDay();
+		 int startTime = gene.getStartTime();
+		 for (int i = 0; i<this.getGenes().size() ; i++){
+			 if (this.getGenes().get(i).getModuleID() == moduleID) {
+				 if (this.getGenes().get(i).getCourseID() == courseID){
+					 if (this.getGenes().get(i).getSemesterID() == semesterID) {
+						 if (this.getGenes().get(i).getDay() == day) {
+							 if (this.getGenes().get(i).getStartTime() == startTime) {
+								 this.getGenes().remove(i);
+								 return true;
+							 }
+						 }
+					 }
+			 	}
+			 }
+		 }
+		 return false;
+	 }
+
 	 //Check chromosome validity
 	 public boolean checkValidity(){
 		 //Check if the number of timeslots of all courses is correct

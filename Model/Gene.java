@@ -1,6 +1,6 @@
 package Model;
 
-public class Gene {
+public class Gene implements Cloneable{
 	
 	private int semesterID;
 	private int moduleID;
@@ -10,7 +10,18 @@ public class Gene {
 	private int startTime;
 	private int endTime;
 	
-	public Gene(){}
+	public Gene() {}
+
+	public Gene clone(){
+		Gene gene = new Gene();
+		gene.setSemesterID(this.semesterID);
+		gene.setModuleID(this.moduleID);
+		gene.setProfesorID(this.profesorID);
+		gene.setCourseID(this.courseID);
+		gene.setDay(this.day);
+		gene.setStartTime(this.startTime);
+		return gene;
+	}
 	
 	public Gene(int semesterID, int moduleID,  int profesorID, char courseID, int day, int startTime) {
 		this.semesterID = semesterID;
@@ -25,7 +36,7 @@ public class Gene {
 	public int getSemesterID(){
 		return semesterID;
 	}
-	public void seSemesterID(int semesterID) {
+	public void setSemesterID(int semesterID) {
 		this.semesterID = semesterID;
 	}
 	public int getDay(){
@@ -60,5 +71,17 @@ public class Gene {
 	}
 	public int getEndTime() {
 		return endTime;
+	}
+
+	public boolean checkGeneValidity(){
+		if(startTime >= Constraints.EARLIEST_TIME && startTime <= Constraints.LATEST_TIME){
+			if(day >= Constraints.DAY_MIN && day <= Constraints.DAY_MAX){
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 }

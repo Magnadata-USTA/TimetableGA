@@ -1,6 +1,7 @@
 package Operators;
 
 import Model.Population;
+import Model.Faculty;
 
 import java.util.ArrayList;
 
@@ -9,5 +10,5 @@ import java.util.ArrayList;
  */
 public abstract class Mutation {
 
-    abstract Population mutatePopulation(Population population, double probabilityOfMutation, double  percentageOfGenes);
+    abstract Population mutatePopulation(Population population, double probabilityChromosomeMutation, double  probabilityGeneMutation, Faculty faculty);
 }

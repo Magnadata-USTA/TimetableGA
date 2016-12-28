@@ -4,6 +4,7 @@ import Model.*;
 import Operators.*;
 
 import DataLoading.DataReading;
+import Utils.SystemGA;
 
 public class GeneticAlgorithm {
 	private DataReading input;
@@ -31,17 +32,24 @@ public class GeneticAlgorithm {
 		//Generation
 		RandomPopulationGeneration r = new RandomPopulationGeneration();
 		BestRandomPopulationGeneration rb = new BestRandomPopulationGeneration();
-		population = r.initiatePopulation(100, baseChromosome, faculty);
+		population = r.initiatePopulation(10, baseChromosome, faculty);
 		//population = rb.initiatePopulation(5, baseChromosome, faculty);
+		System.out.println(population.getChromosomes().size());
 		System.out.println(population.getFitnessAverage());
 		System.out.println(population.getFitnessStandardDeviation());
 		System.out.println(population.getBestFitness());
 		System.out.println(population.getWorseFitness());
 
 		//Mutation and Crossover
-		SwapGenesVerticallyMutation m = new SwapGenesVerticallyMutation();
-		population = m.mutatePopulation(population, 0.03, 0.8);
+		VerticalMutation m = new VerticalMutation();
+		population = m.mutatePopulation(population, 1, 1, faculty);
+		//SystemGA.printOnScreen(population.getChromosomes().get(0));
+		//SystemGA.pause();
 		System.out.println(population.getChromosomes().size());
+		System.out.println(population.getFitnessAverage());
+		System.out.println(population.getFitnessStandardDeviation());
+		System.out.println(population.getBestFitness());
+		System.out.println(population.getWorseFitness());
 
 		return baseChromosome;
 	}

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Felipe on 26/12/2016.
  */
-public class Population {
+public class Population implements Cloneable{
 
     private ArrayList<Chromosome> chromosomes;
 
@@ -14,6 +14,16 @@ public class Population {
     }
     public Population() {
         this.chromosomes = new ArrayList<Chromosome>();
+    }
+
+    public Population clone (){
+        Population population = new Population();
+        population.setChromosomes(chromosomes);
+        return population;
+    }
+
+    public void setChromosomes(ArrayList<Chromosome> chromosomes) {
+        this.chromosomes = chromosomes;
     }
 
     public ArrayList<Chromosome> getChromosomes() {
@@ -73,6 +83,35 @@ public class Population {
 
     public double getFitnessStandardDeviation(){
         return Math.sqrt(getFitnessVariance());
+    }
+
+    public boolean equals(Chromosome chromosome1, Chromosome chromosome2){
+        int numberEvents = 0;
+        if(chromosome1.getGenes().size() == chromosome2.getGenes().size()) {
+            for (int i = 0; i < chromosome1.getGenes().size(); i++) {
+                for (int j = 0; j < chromosome2.getGenes().size(); j++) {
+                    if (chromosome1.getGenes().get(i).getModuleID() == chromosome2.getGenes().get(j).getModuleID()){
+                        if (chromosome1.getGenes().get(i).getCourseID() == chromosome2.getGenes().get(j).getCourseID()) {
+                            if (chromosome1.getGenes().get(i).getSemesterID() == chromosome2.getGenes().get(j).getSemesterID()) {
+                                if (chromosome1.getGenes().get(i).getDay() == chromosome2.getGenes().get(j).getDay()) {
+                                    if (chromosome1.getGenes().get(i).getStartTime() == chromosome2.getGenes().get(j).getStartTime()) {
+                                        numberEvents += 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            System.out.println("Bad chromosome. Number of timeslots is different.");
+        }
+        if(numberEvents == chromosome1.getGenes().size()){
+            System.out.println(numberEvents + " " + chromosome1.getGenes().size());
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

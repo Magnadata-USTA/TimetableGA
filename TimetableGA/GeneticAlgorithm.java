@@ -44,8 +44,10 @@ public class GeneticAlgorithm {
 		//Mutation and Crossover
 		VerticalMutation v = new VerticalMutation();
 		HorizontalMutation h = new HorizontalMutation();
+		SoftConstraintsMutation s = new SoftConstraintsMutation();
 		//population = v.mutatePopulation(population, 1, 1, faculty);
-		population = h.mutatePopulation(population, 1, 1, faculty);
+		//population = h.mutatePopulation(population, 1, 1, faculty);
+		population = s.mutatePopulation(population, 1, 1, faculty);
 		//SystemGA.printOnScreen(population.getChromosomes().get(0));
 		//SystemGA.pause();
 		System.out.println(population.getChromosomes().size());

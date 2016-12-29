@@ -16,7 +16,8 @@ public class Chromosome implements Cloneable{
 	public void setFitness(Faculty faculty) {
 		int deadTimeValue = 0;
 		int hourCheckValue = 0;
-		int professorsFitness = 0;
+		int professorsFitness;
+		int facultyFitness;
 
 		for( int i = 1 ; i <= Constraints.NUMBER_SEMESTERS ; i++ ){
 			deadTimeValue = deadTimeValue + deadTime(i);
@@ -25,7 +26,8 @@ public class Chromosome implements Cloneable{
 			hourCheckValue = hourCheckValue + lunchTime;
 		}
 		professorsFitness = professorsPreferences(faculty);
-		this.fitness = deadTimeValue + hourCheckValue + professorsFitness;
+		facultyFitness = facultyPreferences(faculty);
+		this.fitness = deadTimeValue + hourCheckValue + professorsFitness + facultyFitness;
 		//System.out.println(deadTimeValue + " " + hourCheckValue + " " + professorsFitness);
 	}
  	
@@ -53,7 +55,8 @@ public class Chromosome implements Cloneable{
  		//This method adds all the points from the others fitness value process
  		int deadTimeValue = 0;
  		int hourCheckValue = 0;
-		int professorsFitness = 0;
+		int professorsFitness;
+		int facultyFitness;
  		int fitness;
 
  		for( int i = 1 ; i <= Constraints.NUMBER_SEMESTERS ; i++ ){
@@ -62,8 +65,9 @@ public class Chromosome implements Cloneable{
 			//System.out.println(i+ " " +lunchTime);
 			hourCheckValue = hourCheckValue + lunchTime;
  		}
+ 		facultyFitness = facultyPreferences(faculty);
 		professorsFitness = professorsPreferences(faculty);
- 		fitness = deadTimeValue + hourCheckValue + professorsFitness;
+ 		fitness = deadTimeValue + hourCheckValue + professorsFitness + facultyFitness;
 		//System.out.println(deadTimeValue + " " + hourCheckValue + " " + professorsFitness);
 		return fitness;
  	}
@@ -83,6 +87,16 @@ public class Chromosome implements Cloneable{
 					}
 
 				}
+			}
+		}
+		return preferencesValue;
+	}
+
+	public int facultyPreferences(Faculty faculty){
+		int preferencesValue = 0;
+		for ( int i = 0 ; i < faculty.getPreferences().size() ; i++ ){
+			if (faculty.getPreferences().get(i).getValue() == 1){
+				preferencesValue += 1;
 			}
 		}
 		return preferencesValue;
@@ -283,18 +297,18 @@ public class Chromosome implements Cloneable{
 		 boolean doublingProfessor;
 		 boolean facultyAvailable;
 
-		 if (gene.checkGeneValidity() == true) {
+		 if (gene.checkGeneValidity()) {
 			 //System.out.println(gene.checkGeneValidity());
 			 for (int k = 0; k < faculty.getProfessors().size(); k++) {
 				 if (faculty.getProfessors().get(k).getProfessorID() == course.getProfesorID()) {
 					 professorAvailable = faculty.getProfessors().get(k).checkProfessorAvailability(gene);
-					 if (professorAvailable == true) {
+					 if (professorAvailable) {
 						 doublingCourse = this.checkTimeslotDoubling(gene);
-						 if (doublingCourse == false) {
+						 if (!doublingCourse) {
 							 doublingProfessor = this.checkProfessorDoubling(gene);
-							 if (doublingProfessor == false) {
+							 if (!doublingProfessor ) {
 								 facultyAvailable = faculty.checkFacultyAvailability(gene);
-								 if (facultyAvailable == true) {
+								 if (facultyAvailable) {
 									 return false;
 								 } else {
 									 return true;

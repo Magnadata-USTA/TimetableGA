@@ -79,4 +79,12 @@ public class Gene implements Cloneable{
 			return false;
 		}
 	}
+
+	public boolean checkSoftConstraintTime(int hour){
+		if(startTime == hour){
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

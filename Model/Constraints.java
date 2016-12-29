@@ -13,6 +13,5 @@ public class Constraints {
 	
 	//Test constraints
 	public static int LUNCH_TIME = 12;
-	public static int END_TIME = 16; //END_TIME_TEST
 	public static int EVENT_DURATION = 2;
 }

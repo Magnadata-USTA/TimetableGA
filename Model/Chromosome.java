@@ -222,13 +222,13 @@ public class Chromosome implements Cloneable{
 	public Gene findEmptyTimeslot(Course course){
 		boolean availability = false;
 		Gene gene = new Gene();
-		while(availability == false ){
+		while(!availability){
 			NumberGenerator ng = new NumberGenerator();
 			int day = ng.randomDay();
 			int startTime = ng.randomEvenStartTime();
 			gene = new Gene(course.getSemesterID(), course.getModuleID(), course.getProfesorID(), course.getCourseID(), day, startTime);
 			availability = this.checkTimeslotAvailability(gene);
-			if (availability == true){
+			if (availability){
 				return gene;
 			}
 		}
@@ -237,8 +237,6 @@ public class Chromosome implements Cloneable{
 
 	public boolean checkTimeslotAvailability(Gene gene){
 		int semesterID = gene.getSemesterID();
-		int moduleID = gene.getModuleID();
-		char courseID = gene.getCourseID();
 		int day = gene.getDay();
 		int startTime = gene.getStartTime();
 
@@ -252,7 +250,6 @@ public class Chromosome implements Cloneable{
 				}
 			}
 		}
-
  		//System.out.println("boolean check false");
  		return true; 
  	}
@@ -328,6 +325,28 @@ public class Chromosome implements Cloneable{
 			 return true;
 		 }
 		 return true;
+	 }
+
+	 public boolean isGene(Gene gene){
+		 int moduleID = gene.getModuleID();
+		 int courseID = gene.getCourseID();
+		 int semesterID = gene.getSemesterID();
+		 int day = gene.getDay();
+		 int startTime = gene.getStartTime();
+		 for (int i = 0; i<this.getGenes().size() ; i++){
+			 if (this.getGenes().get(i).getModuleID() == moduleID) {
+				 if (this.getGenes().get(i).getCourseID() == courseID){
+					 if (this.getGenes().get(i).getSemesterID() == semesterID) {
+						 if (this.getGenes().get(i).getDay() == day) {
+							 if (this.getGenes().get(i).getStartTime() == startTime) {
+								 return true;
+							 }
+						 }
+					 }
+				 }
+			 }
+		 }
+		 return false;
 	 }
 
 	 public boolean removeGene(Gene gene){

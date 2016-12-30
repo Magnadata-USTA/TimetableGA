@@ -22,10 +22,10 @@ public class RandomPopulationGeneration extends Generation {
 
                 for (int j = 0; j < numberTimeslots; j++) {
                     boolean hardConstraintsViolation = true;
-                    while (hardConstraintsViolation == true) {
+                    while (hardConstraintsViolation) {
                         Gene availableGene = newChromosome.findEmptyTimeslot(courses.get(i));
                         hardConstraintsViolation = newChromosome.hardConstraintsViolation(courses.get(i), faculty, availableGene);
-                        if(hardConstraintsViolation == false){
+                        if(!hardConstraintsViolation){
                             newChromosome.addGene(availableGene);
                         }
                     }

@@ -1,6 +1,8 @@
 package Operators;
 
 import Model.*;
+import Utils.NumberGenerator;
+import Utils.SystemGA;
 
 import java.util.ArrayList;
 
@@ -49,7 +51,7 @@ public class SoftConstraintsMutation extends Mutation {
                     if (chromosome.getGenes().get(j).getCourseID() == courses.get(k).getCourseID()) {
                         if (faculty.checkFacultySoftConstraints(chromosome.getGenes().get(j))){
                             genesSoftConstraints.addGene(chromosome.getGenes().get(j).clone());
-                            System.out.println(chromosome.getGenes().get(j).getStartTime() + " " + chromosome.getGenes().get(j).getDay() + " " + chromosome.getGenes().get(j).getSemesterID());
+                            System.out.println(chromosome.getGenes().get(j).getProfessorID() + " " +chromosome.getGenes().get(j).getStartTime() + " " + chromosome.getGenes().get(j).getDay() + " " + chromosome.getGenes().get(j).getSemesterID());
                         }
                     }
                 }
@@ -72,8 +74,14 @@ public class SoftConstraintsMutation extends Mutation {
             }
             //Get genes with other (lunch) constraints
             if(chromosome.getGenes().get(j).checkSoftConstraintTime(Constraints.LUNCH_TIME)){
-                genesSoftConstraints.addGene(chromosome.getGenes().get(j).clone());
-                System.out.println(chromosome.getGenes().get(j).getStartTime() + " " + chromosome.getGenes().get(j).getDay() + " " + chromosome.getGenes().get(j).getSemesterID());
+                for (int k = 0; k < courses.size() ; k++) {
+                    if (chromosome.getGenes().get(j).getModuleID() == courses.get(k).getModuleID()) {
+                        if (chromosome.getGenes().get(j).getCourseID() == courses.get(k).getCourseID()) {
+                            genesSoftConstraints.addGene(chromosome.getGenes().get(j).clone());
+                            System.out.println(chromosome.getGenes().get(j).getProfessorID() + " " + chromosome.getGenes().get(j).getStartTime() + " " + chromosome.getGenes().get(j).getDay() + " " + chromosome.getGenes().get(j).getSemesterID());
+                        }
+                    }
+                }
             }
         }
 
@@ -81,17 +89,83 @@ public class SoftConstraintsMutation extends Mutation {
         //Remove doublings in genesSoftConstraints
         Chromosome newGenesSoftConstraints = new Chromosome();
         for (int j = 0; j < genesSoftConstraints.getGenes().size() ; j++) {
-            Gene gene = genesSoftConstraints.getGenes().get(j).clone();
-            newGenesSoftConstraints.addGene(gene);
-            System.out.println(gene.getStartTime() + " " + gene.getDay() + " " + gene.getSemesterID());
-            while(genesSoftConstraints.removeGene(genesSoftConstraints.getGenes().get(j))){
+            if(j==0) {
+                newGenesSoftConstraints.addGene(genesSoftConstraints.getGenes().get(j).clone());
+                System.out.println("Genes without doublings. j=0");
+            }
 
+            newGenesSoftConstraints.getGenes().size();
+            if(!newGenesSoftConstraints.isGene(genesSoftConstraints.getGenes().get(j))){
+                newGenesSoftConstraints.addGene(genesSoftConstraints.getGenes().get(j).clone());
+                System.out.println("Genes without doublings");
             }
         }
 
-        //Get  list of freetimeslots
+        for (int j = 0; j < newGenesSoftConstraints.getGenes().size() ; j++) {
+            // With a probability of probabilityGM
+            if (Math.random() < probabilityGM) {
+                Gene gene = newGenesSoftConstraints.getGenes().get(j).clone();
+                boolean mutatedGene = false;
+                //Remove genes of newGenesSoftConstraints in chromosome
+                chromosome.removeGene(gene);
+                //Try a max. of maxIterations times to relocate randomly the gene in a timeslot with no softconstraint violation
+                int maxIterations = 100;
+                for (int k = 0; k < maxIterations ; k++) {
+                    //Relocate gene violating soft constraints
+                    NumberGenerator ng = new NumberGenerator();
+                    gene.setDay(ng.randomDay());
+                    gene.setStartTime(ng.randomEvenStartTime());
 
-        //Relocate genes violating soft constraints with a probability of probabilityGM
+                    //The following code can be optimized
+                    if (chromosome.checkTimeslotAvailability(gene)) {
+                        for (int m = 0; m < chromosome.getGenes().size() ; m++) {
+                            for (int n = 0; n < courses.size(); n++) {
+                                if (chromosome.getGenes().get(m).getModuleID() == courses.get(n).getModuleID()) {
+                                    if (chromosome.getGenes().get(m).getCourseID() == courses.get(n).getCourseID()) {
+                                        if (!chromosome.hardConstraintsViolation(courses.get(n), faculty, gene)) {
+                                            for (int l = 0; l < faculty.getProfessors().size(); l++) {
+                                                if (faculty.getProfessors().get(l).getProfessorID() == gene.getProfessorID()) {
+                                                    //If professor preference value is not 1. Value of 2 is verified on checkProfessorSoftConstraints function
+                                                    if(!faculty.getProfessors().get(l).checkProfessorSoftConstraints(gene)){
+                                                        //chromosome.addGene(gene);
+                                                        m = chromosome.getGenes().size();
+                                                        n = courses.size();
+                                                        l = faculty.getProfessors().size();
+                                                        k = maxIterations;
+                                                        mutatedGene = true;
+                                                        System.out.println(gene.getModuleID() + " " + gene.getCourseID() + " " + gene.getSemesterID() + " " + gene.getDay() + " " + gene.getStartTime());
+                                                        SystemGA.pause();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+
+                }
+                if(!mutatedGene){
+                    chromosome.addGene(newGenesSoftConstraints.getGenes().get(j));
+                } else {
+                    chromosome.addGene(gene);
+                }
+
+                System.out.println(gene.getProfessorID() + " " +gene.getStartTime() + " " + gene.getDay() + " " + gene.getSemesterID());
+                System.out.println(newGenesSoftConstraints.getGenes().get(j).getProfessorID() + " " + newGenesSoftConstraints.getGenes().get(j).getStartTime() + " " + newGenesSoftConstraints.getGenes().get(j).getDay() + " " + newGenesSoftConstraints.getGenes().get(j).getSemesterID());
+                SystemGA.pause();
+            }
+        }
+
+        /*
+        for (int j = 0; j < newGenesSoftConstraints.getGenes().size() ; j++) {
+            System.out.println(newGenesSoftConstraints.getGenes().get(j).getProfessorID() + " " + newGenesSoftConstraints.getGenes().get(j).getStartTime() + " " + newGenesSoftConstraints.getGenes().get(j).getDay() + " " + newGenesSoftConstraints.getGenes().get(j).getSemesterID());
+        }*/
+
+        SystemGA.pause();
+        mutatedChromosome.setFitness(faculty);
         return mutatedChromosome;
     }
 }

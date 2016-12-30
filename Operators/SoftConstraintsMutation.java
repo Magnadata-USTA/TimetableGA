@@ -40,9 +40,8 @@ public class SoftConstraintsMutation extends Mutation {
         //List genes located violating soft constraints
         ArrayList<Course> courses = faculty.getCourses();
         Chromosome genesSoftConstraints = new Chromosome();
-        Chromosome mutatedChromosome = chromosome.clone();
 
-        System.out.println("New gene");
+        //System.out.println("New gene");
         for (int j = 0; j < chromosome.getGenes().size() ; j++) {
             //Get genes with faculty soft constraints
             //System.out.println("Faculty soft constraints");
@@ -51,7 +50,7 @@ public class SoftConstraintsMutation extends Mutation {
                     if (chromosome.getGenes().get(j).getCourseID() == courses.get(k).getCourseID()) {
                         if (faculty.checkFacultySoftConstraints(chromosome.getGenes().get(j))){
                             genesSoftConstraints.addGene(chromosome.getGenes().get(j).clone());
-                            System.out.println(chromosome.getGenes().get(j).getProfessorID() + " " +chromosome.getGenes().get(j).getStartTime() + " " + chromosome.getGenes().get(j).getDay() + " " + chromosome.getGenes().get(j).getSemesterID());
+                            //System.out.println(chromosome.getGenes().get(j).getProfessorID() + " " +chromosome.getGenes().get(j).getStartTime() + " " + chromosome.getGenes().get(j).getDay() + " " + chromosome.getGenes().get(j).getSemesterID());
                         }
                     }
                 }
@@ -65,7 +64,7 @@ public class SoftConstraintsMutation extends Mutation {
                             if ( chromosome.getGenes().get(j).getProfessorID() == faculty.getProfessors().get(l).getProfessorID()) {
                                 if(faculty.getProfessors().get(l).checkProfessorSoftConstraints(chromosome.getGenes().get(j))){
                                     genesSoftConstraints.addGene(chromosome.getGenes().get(j).clone());
-                                    System.out.println(faculty.getProfessors().get(l).getProfessorID() + " " + chromosome.getGenes().get(j).getStartTime() + " " + chromosome.getGenes().get(j).getDay() + " " + chromosome.getGenes().get(j).getSemesterID());
+                                    //System.out.println(faculty.getProfessors().get(l).getProfessorID() + " " + chromosome.getGenes().get(j).getStartTime() + " " + chromosome.getGenes().get(j).getDay() + " " + chromosome.getGenes().get(j).getSemesterID());
                                 }
                             }
                         }
@@ -78,26 +77,26 @@ public class SoftConstraintsMutation extends Mutation {
                     if (chromosome.getGenes().get(j).getModuleID() == courses.get(k).getModuleID()) {
                         if (chromosome.getGenes().get(j).getCourseID() == courses.get(k).getCourseID()) {
                             genesSoftConstraints.addGene(chromosome.getGenes().get(j).clone());
-                            System.out.println(chromosome.getGenes().get(j).getProfessorID() + " " + chromosome.getGenes().get(j).getStartTime() + " " + chromosome.getGenes().get(j).getDay() + " " + chromosome.getGenes().get(j).getSemesterID());
+                            //System.out.println(chromosome.getGenes().get(j).getProfessorID() + " " + chromosome.getGenes().get(j).getStartTime() + " " + chromosome.getGenes().get(j).getDay() + " " + chromosome.getGenes().get(j).getSemesterID());
                         }
                     }
                 }
             }
         }
 
-        System.out.println("Genes without doublings");
+        //System.out.println("Genes without doublings");
         //Remove doublings in genesSoftConstraints
         Chromosome newGenesSoftConstraints = new Chromosome();
         for (int j = 0; j < genesSoftConstraints.getGenes().size() ; j++) {
             if(j==0) {
                 newGenesSoftConstraints.addGene(genesSoftConstraints.getGenes().get(j).clone());
-                System.out.println("Genes without doublings. j=0");
+                //System.out.println("Genes without doublings. j=0");
             }
 
             newGenesSoftConstraints.getGenes().size();
             if(!newGenesSoftConstraints.isGene(genesSoftConstraints.getGenes().get(j))){
                 newGenesSoftConstraints.addGene(genesSoftConstraints.getGenes().get(j).clone());
-                System.out.println("Genes without doublings");
+                //System.out.println("Genes without doublings");
             }
         }
 
@@ -126,15 +125,15 @@ public class SoftConstraintsMutation extends Mutation {
                                             for (int l = 0; l < faculty.getProfessors().size(); l++) {
                                                 if (faculty.getProfessors().get(l).getProfessorID() == gene.getProfessorID()) {
                                                     //If professor preference value is not 1. Value of 2 is verified on checkProfessorSoftConstraints function
-                                                    if(!faculty.getProfessors().get(l).checkProfessorSoftConstraints(gene)){
+                                                    if(faculty.getProfessors().get(l).checkProfessorDesirableAvailability(gene)){
                                                         //chromosome.addGene(gene);
+                                                        //System.out.println(k +" "+gene.getModuleID() + " " + gene.getCourseID() + " " + gene.getSemesterID() + " " + gene.getDay() + " " + gene.getStartTime());
+                                                        //SystemGA.pause();
                                                         m = chromosome.getGenes().size();
                                                         n = courses.size();
                                                         l = faculty.getProfessors().size();
                                                         k = maxIterations;
                                                         mutatedGene = true;
-                                                        System.out.println(gene.getModuleID() + " " + gene.getCourseID() + " " + gene.getSemesterID() + " " + gene.getDay() + " " + gene.getStartTime());
-                                                        SystemGA.pause();
                                                     }
                                                 }
                                             }
@@ -152,20 +151,17 @@ public class SoftConstraintsMutation extends Mutation {
                 } else {
                     chromosome.addGene(gene);
                 }
-
-                System.out.println(gene.getProfessorID() + " " +gene.getStartTime() + " " + gene.getDay() + " " + gene.getSemesterID());
-                System.out.println(newGenesSoftConstraints.getGenes().get(j).getProfessorID() + " " + newGenesSoftConstraints.getGenes().get(j).getStartTime() + " " + newGenesSoftConstraints.getGenes().get(j).getDay() + " " + newGenesSoftConstraints.getGenes().get(j).getSemesterID());
-                SystemGA.pause();
+                //System.out.println(gene.getProfessorID() + " " +gene.getStartTime() + " " + gene.getDay() + " " + gene.getSemesterID());
+                //System.out.println(newGenesSoftConstraints.getGenes().get(j).getProfessorID() + " " + newGenesSoftConstraints.getGenes().get(j).getStartTime() + " " + newGenesSoftConstraints.getGenes().get(j).getDay() + " " + newGenesSoftConstraints.getGenes().get(j).getSemesterID());
+                //SystemGA.printOnScreen(chromosome);
+                //SystemGA.pause();
             }
         }
-
         /*
         for (int j = 0; j < newGenesSoftConstraints.getGenes().size() ; j++) {
             System.out.println(newGenesSoftConstraints.getGenes().get(j).getProfessorID() + " " + newGenesSoftConstraints.getGenes().get(j).getStartTime() + " " + newGenesSoftConstraints.getGenes().get(j).getDay() + " " + newGenesSoftConstraints.getGenes().get(j).getSemesterID());
         }*/
-
-        SystemGA.pause();
-        mutatedChromosome.setFitness(faculty);
-        return mutatedChromosome;
+        chromosome.setFitness(faculty);
+        return chromosome;
     }
 }

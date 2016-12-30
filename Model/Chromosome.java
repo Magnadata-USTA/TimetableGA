@@ -244,13 +244,11 @@ public class Chromosome implements Cloneable{
 			if (semesterID == this.genes.get(i).getSemesterID()) {
 				if (day == this.genes.get(i).getDay()) {
 					if (startTime == this.genes.get(i).getStartTime()) {
-						//System.out.println("boolean check true");
 						return false;
 					}
 				}
 			}
 		}
- 		//System.out.println("boolean check false");
  		return true; 
  	}
 

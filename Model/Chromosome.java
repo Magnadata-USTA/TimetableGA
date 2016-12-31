@@ -370,6 +370,20 @@ public class Chromosome implements Cloneable{
 		 return false;
 	 }
 
+	 //Adds a valid randomGene
+	 public boolean addRandomGene(Course course, Faculty faculty){
+		 boolean hardConstraintsViolation = true;
+		 while (hardConstraintsViolation) {
+			 Gene availableGene = this.findEmptyTimeslot(course);
+			 hardConstraintsViolation = this.hardConstraintsViolation(course, faculty, availableGene);
+			 if (!hardConstraintsViolation) {
+				 this.addGene(availableGene);
+				 //System.out.println("RG " + availableGene.getModuleID() + " " + availableGene.getCourseID() + " " + availableGene.getProfessorID() + " " + availableGene.getStartTime() + " " + availableGene.getDay() + " " + availableGene.getSemesterID());
+				 return true;
+			 }
+		 }
+		 return false;
+	 }
 	 //Check chromosome validity
 	 public boolean checkValidity(){
 		 //Check if the number of timeslots of all courses is correct

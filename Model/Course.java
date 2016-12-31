@@ -27,5 +27,6 @@ public class Course extends Module {
 	public void setCourseID(char courseID) {
 		this.courseID = courseID;
 	}
+
 		
 }

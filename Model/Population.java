@@ -114,4 +114,11 @@ public class Population implements Cloneable{
         }
     }
 
+    public Chromosome randomChromosome(){
+        int sizePopulation = this.getChromosomes().size();
+        int position = (int)(sizePopulation*Math.random());
+        //System.out.println("Crossover " + position);
+        return this.getChromosomes().get(position).clone();
+    }
+
 }

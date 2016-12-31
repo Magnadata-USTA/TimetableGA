@@ -85,5 +85,18 @@ public class Faculty {
 		return false;
 	}
 
+	public boolean checkCourse(Gene gene){
+		int moduleID = gene.getModuleID();
+		int courseID = gene.getCourseID();
+		for ( int i = 0 ; i < this.courses.size() ; i++ ){
+			if(moduleID == this.courses.get(i).getModuleID()){
+				if (courseID == this.courses.get(i).getCourseID()){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 
 }

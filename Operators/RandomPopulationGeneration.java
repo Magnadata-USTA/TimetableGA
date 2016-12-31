@@ -21,6 +21,8 @@ public class RandomPopulationGeneration extends Generation {
                 int numberTimeslots = hoursPerWeek/duration;
 
                 for (int j = 0; j < numberTimeslots; j++) {
+                    newChromosome.addRandomGene(courses.get(i), faculty);
+                    /*
                     boolean hardConstraintsViolation = true;
                     while (hardConstraintsViolation) {
                         Gene availableGene = newChromosome.findEmptyTimeslot(courses.get(i));
@@ -28,7 +30,7 @@ public class RandomPopulationGeneration extends Generation {
                         if(!hardConstraintsViolation){
                             newChromosome.addGene(availableGene);
                         }
-                    }
+                    }*/
                 }
             }
             population.addChromosome(newChromosome);

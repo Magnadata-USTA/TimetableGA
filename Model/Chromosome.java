@@ -13,6 +13,10 @@ public class Chromosome implements Cloneable{
 		return fitness;
 	}
 
+	public void setFitness(int fitness){
+		this.fitness = fitness;
+	}
+
 	public void setFitness(Faculty faculty) {
 		int deadTimeValue = 0;
 		int hourCheckValue = 0;
@@ -49,27 +53,6 @@ public class Chromosome implements Cloneable{
  	
  	public ArrayList<Gene> getGenes(){
  		return this.genes;
- 	}
-
- 	public int fitness(Faculty faculty){
- 		//This method adds all the points from the others fitness value process
- 		int deadTimeValue = 0;
- 		int hourCheckValue = 0;
-		int professorsFitness;
-		int facultyFitness;
- 		int fitness;
-
- 		for( int i = 1 ; i <= Constraints.NUMBER_SEMESTERS ; i++ ){
- 			deadTimeValue = deadTimeValue + deadTime(i);
- 			int lunchTime = hourCheck(i, Constraints.LUNCH_TIME);
-			//System.out.println(i+ " " +lunchTime);
-			hourCheckValue = hourCheckValue + lunchTime;
- 		}
- 		facultyFitness = facultyPreferences(faculty);
-		professorsFitness = professorsPreferences(faculty);
- 		fitness = deadTimeValue + hourCheckValue + professorsFitness + facultyFitness;
-		//System.out.println(deadTimeValue + " " + hourCheckValue + " " + professorsFitness);
-		return fitness;
  	}
 
 	public int professorsPreferences(Faculty faculty){

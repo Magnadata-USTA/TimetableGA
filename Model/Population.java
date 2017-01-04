@@ -121,4 +121,13 @@ public class Population implements Cloneable{
         return this.getChromosomes().get(position).clone();
     }
 
+    public boolean isChromosome(Chromosome chromosome){
+        for (int i=0; i<this.getChromosomes().size(); i++){
+            if(this.equals(this.getChromosomes().get(i), chromosome)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

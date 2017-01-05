@@ -34,6 +34,13 @@ public class Population implements Cloneable{
         this.chromosomes.add(chromosome);
     }
 
+    public int getTotalFitness(){
+        int totalFitness = 0;
+        for (int i = 0; i < chromosomes.size(); i++){
+            totalFitness += chromosomes.get(i).getFitness();
+        }
+        return totalFitness;
+    }
     public Chromosome getBestChromosome(){
         int bestPosition = 0;
         double fitness = Double.POSITIVE_INFINITY;

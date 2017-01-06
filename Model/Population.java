@@ -137,4 +137,21 @@ public class Population implements Cloneable{
         return false;
     }
 
+    public Population generateSubPopulation(int size){
+        Population subPopulation = new Population();
+        for (int i=0; i<size; i++){
+            Chromosome chromosome = this.randomChromosome();
+            if(i!=0){
+                if(!subPopulation.isChromosome(chromosome)){
+                    subPopulation.addChromosome(chromosome);
+                } else {
+                    i--;
+                }
+            } else{
+                subPopulation.addChromosome(chromosome);
+            }
+        }
+        return subPopulation;
+    }
+
 }

@@ -63,8 +63,12 @@ public class GeneticAlgorithm {
 		//population = rs.selectPopulation(10, population, faculty);
 		//ElitistSelection es = new ElitistSelection();
 		//population = es.selectPopulation(10, population, faculty);
-		RouletteSelection ros = new RouletteSelection();
-		population = ros.selectPopulation(10, population, faculty);
+		//RouletteSelection ros = new RouletteSelection();
+		//population = ros.selectPopulation(10, population, faculty);
+		//SUSSelection sus = new SUSSelection();
+		//population = sus.selectPopulation(10, population, faculty);
+		TournamentSelection ts = new TournamentSelection();
+		population = ts.selectPopulation(10, population, faculty);
 		System.out.println(population.getChromosomes().size());
 		System.out.println(population.getFitnessAverage());
 		System.out.println(population.getFitnessStandardDeviation());

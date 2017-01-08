@@ -15,8 +15,9 @@ public class SoftConstraintsMutation extends Mutation {
     public Population mutatePopulation(Population population, double probabilityCM, double probabilityGM, Faculty faculty) {
         Population futurePopulation = new Population();
         for (int i = 0; i < population.getChromosomes().size() ; i++) {
+            Chromosome oldChromosome = population.getChromosomes().get(i).clone();
+            oldChromosome.setFitness(faculty);
             if(Math.random() < probabilityCM){
-                Chromosome oldChromosome = population.getChromosomes().get(i).clone();
                 Chromosome mutatedChromosome = mutateChromosome(oldChromosome, faculty, probabilityGM);
                 //oldChromosome.setFitness(faculty);
                 if (futurePopulation.equals(population.getChromosomes().get(i), mutatedChromosome)){
@@ -30,6 +31,8 @@ public class SoftConstraintsMutation extends Mutation {
                     //SystemGA.printOnScreen(mutatedChromosome);
                     //SystemGA.pause();
                 }
+            } else {
+                futurePopulation.addChromosome(oldChromosome);
             }
         }
         return futurePopulation;
@@ -151,10 +154,10 @@ public class SoftConstraintsMutation extends Mutation {
                 } else {
                     chromosome.addGene(gene);
                 }
-                System.out.println(gene.getProfessorID() + " " +gene.getStartTime() + " " + gene.getDay() + " " + gene.getSemesterID());
-                System.out.println(newGenesSoftConstraints.getGenes().get(j).getProfessorID() + " " + newGenesSoftConstraints.getGenes().get(j).getStartTime() + " " + newGenesSoftConstraints.getGenes().get(j).getDay() + " " + newGenesSoftConstraints.getGenes().get(j).getSemesterID());
-                SystemGA.printOnScreen(chromosome);
-                SystemGA.pause();
+                //System.out.println(gene.getProfessorID() + " " +gene.getStartTime() + " " + gene.getDay() + " " + gene.getSemesterID());
+                //System.out.println(newGenesSoftConstraints.getGenes().get(j).getProfessorID() + " " + newGenesSoftConstraints.getGenes().get(j).getStartTime() + " " + newGenesSoftConstraints.getGenes().get(j).getDay() + " " + newGenesSoftConstraints.getGenes().get(j).getSemesterID());
+                //SystemGA.printOnScreen(chromosome);
+                //SystemGA.pause();
             }
         }
         /*

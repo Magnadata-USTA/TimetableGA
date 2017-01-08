@@ -13,8 +13,9 @@ public class HorizontalMutation extends Mutation {
     public Population mutatePopulation(Population population, double probabilityCM, double probabilityGM, Faculty faculty){
         Population futurePopulation = new Population();
         for (int i = 0; i < population.getChromosomes().size() ; i++) {
+            Chromosome oldChromosome = population.getChromosomes().get(i).clone();
+            oldChromosome.setFitness(faculty);
             if(Math.random() < probabilityCM){
-                Chromosome oldChromosome = population.getChromosomes().get(i).clone();
                 Chromosome mutatedChromosome = mutateChromosome(oldChromosome, faculty, probabilityGM);
                 //oldChromosome.setFitness(faculty);
                 if (futurePopulation.equals(population.getChromosomes().get(i), mutatedChromosome) == true){
@@ -28,6 +29,8 @@ public class HorizontalMutation extends Mutation {
                     //SystemGA.printOnScreen(mutatedChromosome);
                     //SystemGA.pause();
                 }
+            } else {
+                futurePopulation.addChromosome(oldChromosome);
             }
         }
         return futurePopulation;

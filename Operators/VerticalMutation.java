@@ -13,8 +13,9 @@ public class VerticalMutation extends Mutation {
     public Population mutatePopulation(Population population, double probabilityCM, double probabilityGM, Faculty faculty){
         Population futurePopulation = new Population();
         for (int i = 0; i < population.getChromosomes().size() ; i++) {
+            Chromosome oldChromosome = population.getChromosomes().get(i).clone();
+            oldChromosome.setFitness(faculty);
             if(Math.random() < probabilityCM){
-                Chromosome oldChromosome = population.getChromosomes().get(i).clone();
                 Chromosome mutatedChromosome = mutateChromosome(oldChromosome, faculty, probabilityGM);
                 //oldChromosome.setFitness(faculty);
                 if (futurePopulation.equals(population.getChromosomes().get(i), mutatedChromosome)){
@@ -25,6 +26,8 @@ public class VerticalMutation extends Mutation {
                     futurePopulation.addChromosome(population.getChromosomes().get(i));
                     futurePopulation.addChromosome(mutatedChromosome);
                 }
+            } else {
+                futurePopulation.addChromosome(oldChromosome);
             }
         }
         return futurePopulation;

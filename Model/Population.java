@@ -16,9 +16,14 @@ public class Population implements Cloneable{
         this.chromosomes = new ArrayList<Chromosome>();
     }
 
-    public Population clone (){
+    public Population clone (Faculty faculty){
         Population population = new Population();
-        population.setChromosomes(chromosomes);
+        Chromosome chromosome;
+        for(int i=0; i<chromosomes.size(); i++){
+            chromosome = chromosomes.get(i).clone();
+            chromosome.setFitness(faculty);
+            population.addChromosome(chromosome);
+        }
         return population;
     }
 

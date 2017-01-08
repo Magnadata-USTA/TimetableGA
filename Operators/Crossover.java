@@ -11,6 +11,6 @@ import java.util.ArrayList;
  */
 public abstract class Crossover {
 
-    abstract Population crossPopulation(Population population, double probabilityChromosomesCrossover, double probabilityCourseCrossover, Faculty faculty);
+    abstract Population crossPopulation(Population population, double probabilityChromosomesCrossover, double percentageDominantChromosome, Faculty faculty);
     abstract Chromosome crossChromosomes(Chromosome chromosomeDominant, Chromosome chromosome2, double percentageDominantChromosome, Faculty faculty);
 }

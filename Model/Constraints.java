@@ -9,7 +9,7 @@ public class Constraints {
 	public static int HR_MAX = 20; //FINISH_TIME
 	public static int DAY_MIN = 1;
 	public static int DAY_MAX = 5;
-	public static int NUMBER_SEMESTERS = 2;
+	public static int NUMBER_SEMESTERS = 3;
 	
 	//Test constraints
 	public static int LUNCH_TIME = 12;

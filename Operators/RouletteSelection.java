@@ -36,13 +36,14 @@ public class RouletteSelection extends Selection {
                 value -= fitnessComplement.get(j);
                 if(value <= 0){
                     chromosomePosition = j;
+                    //System.out.println("chromosomePosition " + j + " value " + totalFitnessComplement);
                     break;
                 }
             }
-
             Chromosome chromosome = population.getChromosomes().get(chromosomePosition).clone();
             chromosome.setFitness(faculty);
-
+            futurePopulation.addChromosome(chromosome);
+            /*
             if(i!=0){
                 if(!futurePopulation.isChromosome(chromosome)){
                     futurePopulation.addChromosome(chromosome);
@@ -51,7 +52,7 @@ public class RouletteSelection extends Selection {
                 }
             } else{
                 futurePopulation.addChromosome(chromosome);
-            }
+            }*/
         }
         return futurePopulation;
     }

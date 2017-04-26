@@ -13,7 +13,7 @@ public class DataReading{
 		
 		Chromosome c = new Chromosome();
 		try {        
-	        CsvReader baseTimetable_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Base Timetables.csv");
+	        CsvReader baseTimetable_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Dataset2\\Base Timetables.csv");
 	        baseTimetable_import.readHeaders();	         
 	        while (baseTimetable_import.readRecord())
 	        {
@@ -43,21 +43,22 @@ public class DataReading{
 	public Faculty loadData(){
 		
 		Faculty c = new Faculty();
+
 		try {
 			
-			CsvReader modules_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Modules.csv");
+			CsvReader modules_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Dataset2\\Modules.csv");
 	        modules_import.readHeaders();
 	        
-	        CsvReader courses_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Courses.csv");
+	        CsvReader courses_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Dataset2\\Courses.csv");
 	        courses_import.readHeaders();
 
-			CsvReader preferencesProfessors_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\PreferencesProfessors.csv");
+			CsvReader preferencesProfessors_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Dataset2\\PreferencesProfessors.csv");
 			preferencesProfessors_import.readHeaders();
 
-			CsvReader preferencesFaculty_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\PreferencesFaculty.csv");
+			CsvReader preferencesFaculty_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Dataset2\\PreferencesFaculty.csv");
 			preferencesFaculty_import.readHeaders();
 
-			CsvReader professors_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Professors.csv");
+			CsvReader professors_import = new CsvReader("C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\Data\\Dataset2\\Professors.csv");
 			professors_import.readHeaders();
 
 			while (professors_import.readRecord())

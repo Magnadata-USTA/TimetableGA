@@ -11,8 +11,8 @@ public class main {
 
     public static void main (String args[]){
         DataReading input = new DataReading();
-        int sizePopulation = 100;
-        int numGenerations = 10000;
+        int sizePopulation = 10;
+        int numGenerations = 1000;
         double probabilityChromosomeMutation = 0.8;
         double probabilityGeneMutation = 0.5;
         double probabilityChromosomesCrossover = 0.5;

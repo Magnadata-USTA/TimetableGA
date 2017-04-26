@@ -8,8 +8,8 @@ public class Constraints {
 	//end time of the all classes
 	public static int HR_MAX = 20; //FINISH_TIME
 	public static int DAY_MIN = 1;
-	public static int DAY_MAX = 5;
-	public static int NUMBER_SEMESTERS = 3;
+	public static int DAY_MAX = 6;
+	public static int NUMBER_SEMESTERS = 10;
 	
 	//Test constraints
 	public static int LUNCH_TIME = 12;

@@ -25,7 +25,6 @@ public class SUSSelection extends Selection {
             fitnessComplement.add(complement);
             //System.out.println(population.getChromosomes().get(i).getFitness()+ " " + complement);
         }
-        //SystemGA.pause();
 
         float totalFitnessComplement = 0;
         for (int i=0; i<size; i++){

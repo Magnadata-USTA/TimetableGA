@@ -4,6 +4,7 @@ import Model.*;
 import Utils.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Felipe on 17/12/2016.
@@ -35,8 +36,10 @@ public class RandomPopulationGeneration extends Generation {
             }
             population.addChromosome(newChromosome);
             newChromosome.setFitness(faculty);
-            //int fitness = newChromosome.getFitness();
-            //System.out.println("Fitness value new is = "+fitness);
+
+            Date date = new Date();
+            int fitness = newChromosome.getFitness();
+            System.out.println("Fitness value new is = "+fitness + " " + date.toString());
 			//SystemGA.printOnScreen(newChromosome);
 			//SystemGA.pause();
         }

@@ -5,6 +5,7 @@ import Model.Chromosome;
 import Model.Population;
 import Model.Faculty;
 import Operators.*;
+import Utils.*;
 import java.util.Date;
 
 /**
@@ -15,8 +16,6 @@ public class GA1 extends GeneticAlgorithm {
     @Override
     Chromosome run(DataReading input, int sizePopulation, int numGenerations, double probabilityChromosomeMutation, double  probabilityGeneMutation, double probabilityChromosomesCrossover, double percentageDominantChromosome) {
 
-        Date date = new Date();
-
         Faculty faculty = input.loadData();
         Chromosome baseChromosome = input.loadChromosome();
         baseChromosome.setFitness(faculty);
@@ -25,11 +24,14 @@ public class GA1 extends GeneticAlgorithm {
         //Generate initial population
         //BestRandomPopulationGeneration g = new BestRandomPopulationGeneration();
 
+
+        Date date = new Date();
         System.out.println("Data load at: " + date.toString());
 
         RandomPopulationGeneration g = new RandomPopulationGeneration();
         population = g.initiatePopulation(sizePopulation, baseChromosome, faculty);
 
+        date = new Date();
         System.out.println("Initial population at:" + date.toString());
 
         //VerticalMutation m = new VerticalMutation();
@@ -53,8 +55,11 @@ public class GA1 extends GeneticAlgorithm {
             population = s.selectPopulation(sizePopulation, population.clone(faculty), faculty);
 
             // display time and date using toString()
-            System.out.println(i + date.toString());
-            System.out.println(i + " " + population.getChromosomes().size() + " " + population.getBestFitness() + " " + population.getFitnessAverage() + " " + population.getFitnessStandardDeviation());
+            //System.out.println(i + date.toString());
+            date = new Date();
+            System.out.println(i + " " + population.getChromosomes().size() + " " + population.getBestFitness() + " " + population.getFitnessAverage() + " " + population.getFitnessStandardDeviation() + " " + date.toString());
+            //SystemGA.printOnScreen(population.getBestChromosome());
+            //SystemGA.pause();
         }
         //Return best individual
         return population.getBestChromosome();

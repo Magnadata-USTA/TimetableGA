@@ -64,8 +64,9 @@ public class DataReading{
 			while (professors_import.readRecord())
 			{
 				String pID = professors_import.get("professorID");
+				String name = professors_import.get("name");
 				int professorID = Integer.parseInt(pID);
-				c.addProfessor(new Professor(professorID));
+				c.addProfessor(new Professor(professorID, name));
 			}
 
 			ArrayList<Professor> professors =  c.getProfessors();

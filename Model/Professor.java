@@ -5,17 +5,27 @@ import java.util.ArrayList;
 public class Professor {
 	
 	private int professorID;
+	private String name;
 	private ArrayList<Module> modules;
 	private ArrayList<Preference> preferences;
 
-	public Professor(int professorID) {
+	public Professor(int professorID, String name) {
 		this.professorID = professorID;
+		this.name = name;
 		this.modules = new ArrayList<Module>();
 		this.preferences = new ArrayList<Preference>();
 	}
 
 	public int getProfessorID() {
 		return professorID;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void addModule(Module module){

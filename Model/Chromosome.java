@@ -31,7 +31,9 @@ public class Chromosome implements Cloneable{
 		}
 		professorsFitness = professorsPreferences(faculty);
 		facultyFitness = facultyPreferences(faculty);
-		this.fitness = deadTimeValue + hourCheckValue + professorsFitness + facultyFitness;
+		this.fitness = (int) (0.5*deadTimeValue + 1.3*hourCheckValue + 1.5*professorsFitness + 0.2*facultyFitness);
+		//System.out.println(this.fitness);
+		//SystemGA.pause();
 		//System.out.println(deadTimeValue + " " + hourCheckValue + " " + professorsFitness);
 	}
  	

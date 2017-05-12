@@ -34,21 +34,24 @@ public class GA1 extends GeneticAlgorithm {
         date = new Date();
         System.out.println("Initial population at:" + date.toString());
 
-        //VerticalMutation m = new VerticalMutation();
+        VerticalMutation m = new VerticalMutation();
         //HorizontalMutation m = new HorizontalMutation();
-        SoftConstraintsMutation m = new SoftConstraintsMutation();
+        //SoftConstraintsMutation m = new SoftConstraintsMutation();
         CourseCrossover c = new CourseCrossover();
         //RandomSelection s = new RandomSelection();
-        //ElitistSelection s = new ElitistSelection();
+        ElitistSelection s = new ElitistSelection();
         //TruncationSelection s = new TruncationSelection();
-        TournamentSelection s = new TournamentSelection();
+        //TournamentSelection s = new TournamentSelection();
         //SUSSelection s = new SUSSelection();
         //RouletteSelection s = new RouletteSelection();
+
+        Chromosome theBestChromosome = new Chromosome();
+        theBestChromosome = population.getBestChromosome();
 
         //Repeat numGenerations times
         for(int i = 1; i<numGenerations+1; i++){
             //Mutate population
-            //population = m.mutatePopulation(population.clone(faculty), probabilityChromosomeMutation, probabilityGeneMutation, faculty);
+            population = m.mutatePopulation(population.clone(faculty), probabilityChromosomeMutation, probabilityGeneMutation, faculty);
             //Crossover population
             population = c.crossPopulation(population.clone(faculty), probabilityChromosomesCrossover, percentageDominantChromosome, faculty);
             //Select population
@@ -58,10 +61,17 @@ public class GA1 extends GeneticAlgorithm {
             //System.out.println(i + date.toString());
             date = new Date();
             System.out.println(i + " " + population.getChromosomes().size() + " " + population.getBestFitness() + " " + population.getFitnessAverage() + " " + population.getFitnessStandardDeviation() + " " + date.toString());
+            SystemGA.printStatsInFile(population, i, probabilityChromosomeMutation, probabilityGeneMutation, probabilityChromosomesCrossover, percentageDominantChromosome);
             //SystemGA.printOnScreen(population.getBestChromosome());
             //SystemGA.pause();
+            theBestChromosome.setFitness(faculty);
+            population.getBestChromosome().setFitness(faculty);
+            if(theBestChromosome.getFitness() >= population.getBestChromosome().getFitness()){
+                theBestChromosome = population.getBestChromosome();
+            }
         }
         //Return best individual
+        population.addChromosome(theBestChromosome);
         return population.getBestChromosome();
     }
 }

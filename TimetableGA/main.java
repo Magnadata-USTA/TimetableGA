@@ -13,10 +13,10 @@ public class main {
     public static void main (String args[]){
         DataReading input = new DataReading();
         int sizePopulation = 30;
-        int numGenerations = 500;
-        double probabilityChromosomeMutation = 0.7;
-        double probabilityGeneMutation = 0.5;
-        double probabilityChromosomesCrossover = 0.3;
+        int numGenerations = 200;
+        double probabilityChromosomeMutation = 0.03;
+        double probabilityGeneMutation = 0.03;
+        double probabilityChromosomesCrossover = 0.03;
         double percentageDominantChromosome = 0.5;
 
         double stepProbabilityChromosomeMutation = 0.03;
@@ -31,7 +31,7 @@ public class main {
                 while (probabilityChromosomesCrossover <= 1) {
                     Chromosome c = ga1.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
                             probabilityChromosomesCrossover, percentageDominantChromosome);
-                    SystemGA.printInFile(c, faculty, probabilityChromosomeMutation, probabilityGeneMutation, probabilityChromosomesCrossover, +
+                    SystemGA.printInHtml(c, faculty, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, probabilityChromosomesCrossover, +
                             percentageDominantChromosome);
                     probabilityChromosomesCrossover += stepProbabilityChromosomesCrossover;
                     //SystemGA.pause();

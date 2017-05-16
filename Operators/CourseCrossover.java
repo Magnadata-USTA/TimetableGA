@@ -21,8 +21,14 @@ public class CourseCrossover extends Crossover {
             if (Math.random() < probabilityChC) {
                 Chromosome chromosome1 = population.randomChromosome();
                 Chromosome chromosome2 = population.randomChromosome();
+                //Break to avoid program blocks
+                int counter = 1000;
                 while (population.equals(chromosome1, chromosome2)) {
                     chromosome2 = population.randomChromosome();
+                    counter--;
+                    if(counter==0){
+                        break;
+                    }
                 }
                 Chromosome childChromosome1 = crossChromosomes(chromosome1, chromosome2, percentageDC, faculty);
                 if (!population.equals(chromosome1, childChromosome1)) {
@@ -78,7 +84,9 @@ public class CourseCrossover extends Crossover {
                     }
                     if (!geneCrossover) {
                         if (facultyCourse) {
-                            childChromosome.addRandomGene(courses.get(k), faculty);
+                            //childChromosome.addRandomGene(courses.get(k), faculty);
+                            // It means it was not possibe to birth a child
+                            return chromosome1;
                         }
                     }
                 }
@@ -102,7 +110,9 @@ public class CourseCrossover extends Crossover {
                     }
                     if (!geneCrossover) {
                         if (facultyCourse) {
-                            childChromosome.addRandomGene(courses.get(k), faculty);
+                            //childChromosome.addRandomGene(courses.get(k), faculty);
+                            // It means it was not possibe to birth a child
+                            return chromosome1;
                         }
                     }
                 }

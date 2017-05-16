@@ -11,7 +11,7 @@ import Utils.*;
 public class BestRandomPopulationGeneration extends Generation {
 
     public Population initiatePopulation(int size, Chromosome chromosome, Faculty faculty) {
-        int sizeBest = 100;
+        int sizeBest = 20;
         Population population = new Population();
         Chromosome newChromosome;
         RandomPopulationGeneration r = new RandomPopulationGeneration();

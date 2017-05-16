@@ -54,7 +54,7 @@ public class SystemGA {
             bw.write("<body>" + "\n");
             bw.write("<h3>Parameters</h3>\n");
 
-            bw.write("<table style=\"width:70%\">\n");
+            bw.write("<table style=\"width:100%\">\n");
             bw.write("  <tr>\n");
 
             bw.write("      <td>Fitness: " + chromosome.getFitness() + "</td>\n");
@@ -87,7 +87,7 @@ public class SystemGA {
                     }
                 }
                 bw.write("<h3>Semestre: " + semesterID + "</h3>\n");
-                bw.write("<table style=\"width:70%\">\n");
+                bw.write("<table style=\"width:100%\">\n");
                 bw.write("  <tr>\n");
                 bw.write("      <th></th>\n");
                 bw.write("      <th>Lunes</th>\n");

@@ -15,7 +15,6 @@ public class GA1 extends GeneticAlgorithm {
 
     @Override
     Chromosome run(DataReading input, int sizePopulation, int numGenerations, double probabilityChromosomeMutation, double  probabilityGeneMutation, double probabilityChromosomesCrossover, double percentageDominantChromosome) {
-
         Faculty faculty = input.loadData();
         Chromosome baseChromosome = input.loadChromosome();
         baseChromosome.setFitness(faculty);
@@ -24,19 +23,21 @@ public class GA1 extends GeneticAlgorithm {
         //Generate initial population
         //BestRandomPopulationGeneration g = new BestRandomPopulationGeneration();
 
-
         Date date = new Date();
         System.out.println("Data load at: " + date.toString());
 
         RandomPopulationGeneration g = new RandomPopulationGeneration();
+        //BestRandomPopulationGeneration g = new BestRandomPopulationGeneration();
         population = g.initiatePopulation(sizePopulation, baseChromosome, faculty);
 
         date = new Date();
         System.out.println("Initial population at:" + date.toString());
+        long unixTime = System.currentTimeMillis() / 1000L;
+        System.out.println("UnixTime:" + unixTime);
 
-        VerticalMutation m = new VerticalMutation();
+        //VerticalMutation m = new VerticalMutation();
         //HorizontalMutation m = new HorizontalMutation();
-        //SoftConstraintsMutation m = new SoftConstraintsMutation();
+        SoftConstraintsMutation m = new SoftConstraintsMutation();
         CourseCrossover c = new CourseCrossover();
         //RandomSelection s = new RandomSelection();
         ElitistSelection s = new ElitistSelection();
@@ -44,6 +45,7 @@ public class GA1 extends GeneticAlgorithm {
         //TournamentSelection s = new TournamentSelection();
         //SUSSelection s = new SUSSelection();
         //RouletteSelection s = new RouletteSelection();
+
 
         Chromosome theBestChromosome = new Chromosome();
         theBestChromosome = population.getBestChromosome();
@@ -72,6 +74,11 @@ public class GA1 extends GeneticAlgorithm {
         }
         //Return best individual
         population.addChromosome(theBestChromosome);
+        long unixTime2 = System.currentTimeMillis() / 1000L;
+        date = new Date();
+        System.out.println("Initial population at:" + date.toString());
+        System.out.println("UnixTime2:" + unixTime2);
+        System.out.println("Diference:" + (unixTime2-unixTime));
         return population.getBestChromosome();
     }
 }

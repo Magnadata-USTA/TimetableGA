@@ -207,15 +207,27 @@ public class Chromosome implements Cloneable{
 	public Gene findEmptyTimeslot(Course course){
 		boolean availability = false;
 		Gene gene = new Gene();
+		//counter is used to stop looking for an empty timeslot. Thus, avoiding program blocks in this routine
+		//int counter = 10;
 		while(!availability){
 			NumberGenerator ng = new NumberGenerator();
 			int day = ng.randomDay();
 			int startTime = ng.randomEvenStartTime();
 			gene = new Gene(course.getSemesterID(), course.getModuleID(), course.getProfesorID(), course.getCourseID(), day, startTime);
+			//System.out.println("RG " + gene.getModuleID() + " " + gene.getCourseID() + " " + gene.getProfessorID() + " " + gene.getStartTime() + " " + gene.getDay() + " " + gene.getSemesterID());
 			availability = this.checkTimeslotAvailability(gene);
 			if (availability){
 				return gene;
 			}
+			//System.out.println("Empty ts count: " + counter);
+			/*counter--;
+			if (counter == 0){
+				//System.out.println("RG " + gene.getModuleID() + " " + gene.getCourseID() + " " + gene.getProfessorID() + " " + gene.getStartTime() + " " + gene.getDay() + " " + gene.getSemesterID());
+				//Invalidate gene
+				gene.setDay(10);
+				//SystemGA.pause();
+				return gene;
+			}*/
 		}
 		return gene;
 	}
@@ -358,14 +370,29 @@ public class Chromosome implements Cloneable{
 	 //Adds a valid randomGene
 	 public boolean addRandomGene(Course course, Faculty faculty){
 		 boolean hardConstraintsViolation = true;
+		 //counter is used to stop looking for an empty timeslot. Thus, avoiding program blocks in this routine
+		 //int counter = 20;
 		 while (hardConstraintsViolation) {
 			 Gene availableGene = this.findEmptyTimeslot(course);
-			 hardConstraintsViolation = this.hardConstraintsViolation(course, faculty, availableGene);
-			 if (!hardConstraintsViolation) {
-				 this.addGene(availableGene);
+			 //if(availableGene.checkGeneValidity() == true) {
+				 hardConstraintsViolation = this.hardConstraintsViolation(course, faculty, availableGene);
+				 if (!hardConstraintsViolation) {
+					 this.addGene(availableGene);
+					 //System.out.println("RG " + availableGene.getModuleID() + " " + availableGene.getCourseID() + " " + availableGene.getProfessorID() + " " + availableGene.getStartTime() + " " + availableGene.getDay() + " " + availableGene.getSemesterID());
+					 return true;
+				 }
+			 //} else{
 				 //System.out.println("RG " + availableGene.getModuleID() + " " + availableGene.getCourseID() + " " + availableGene.getProfessorID() + " " + availableGene.getStartTime() + " " + availableGene.getDay() + " " + availableGene.getSemesterID());
-				 return true;
-			 }
+				 //SystemGA.pause();
+				 //return false;
+			//}
+			 /*counter--;
+			 //System.out.println("this counter " + counter);
+			 if(counter == 0){
+				 System.out.println(counter);
+				 hardConstraintsViolation = false;
+				 return false;
+			 }*/
 		 }
 		 return false;
 	 }
@@ -374,8 +401,8 @@ public class Chromosome implements Cloneable{
 		 //Check if the number of timeslots of all courses is correct
 		 return true;
 	 }
+	//Delete genes by moduleID
 
-	 //Delete genes by moduleID
 	public boolean deleteGenesByModuleID(){
 		return true;
 	}

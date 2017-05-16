@@ -14,6 +14,7 @@ public class RandomPopulationGeneration extends Generation {
     public Population initiatePopulation(int size, Chromosome chromosome, Faculty faculty){
         Population population = new Population();
         for (int h = 0 ; h < size ;  h++) {
+            System.out.println("Size: " + h);
             Chromosome newChromosome = chromosome.clone();
             ArrayList<Course> courses = faculty.getCourses();
             for (int i = 0; i < courses.size(); i++) {
@@ -22,7 +23,16 @@ public class RandomPopulationGeneration extends Generation {
                 int numberTimeslots = hoursPerWeek/duration;
 
                 for (int j = 0; j < numberTimeslots; j++) {
+                    //Avoid program blocks by restarting chromosome creation.
                     newChromosome.addRandomGene(courses.get(i), faculty);
+                    /*if(!newChromosome.addRandomGene(courses.get(i), faculty)){
+                        i = 0;
+                        j = numberTimeslots;
+                        newChromosome = chromosome.clone();
+                        System.out.println("here again " + population.getChromosomes().size());
+                        SystemGA.pause();
+                        //break;
+                    }*/
                     /*
                     boolean hardConstraintsViolation = true;
                     while (hardConstraintsViolation) {
@@ -36,8 +46,7 @@ public class RandomPopulationGeneration extends Generation {
             }
             population.addChromosome(newChromosome);
             newChromosome.setFitness(faculty);
-
-            Date date = new Date();
+            //Date date = new Date();
             //int fitness = newChromosome.getFitness();
             //System.out.println("Fitness value new is = "+fitness + " " + date.toString());
 			//SystemGA.printOnScreen(newChromosome);

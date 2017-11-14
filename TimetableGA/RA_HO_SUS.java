@@ -2,16 +2,17 @@ package TimetableGA;
 
 import DataLoading.DataReading;
 import Model.Chromosome;
-import Model.Population;
 import Model.Faculty;
+import Model.Population;
 import Operators.*;
-import Utils.*;
+import Utils.SystemGA;
+
 import java.util.Date;
 
 /**
  * Created by Felipe on 07/01/2017.
  */
-public class GA1 extends GeneticAlgorithm {
+public class RA_HO_SUS extends GeneticAlgorithm {
 
     @Override
     Chromosome run(DataReading input, int sizePopulation, int numGenerations, double probabilityChromosomeMutation, double  probabilityGeneMutation, double probabilityChromosomesCrossover, double percentageDominantChromosome) {
@@ -21,14 +22,11 @@ public class GA1 extends GeneticAlgorithm {
         baseChromosome.setFitness(faculty);
         System.out.println(baseChromosome.getFitness());
         Population population;
-        //Generate initial population
-        //BestRandomPopulationGeneration g = new BestRandomPopulationGeneration();
 
         Date date = new Date();
         System.out.println("Data load at: " + date.toString());
 
         RandomPopulationGeneration g = new RandomPopulationGeneration();
-        //BestRandomPopulationGeneration g = new BestRandomPopulationGeneration();
         population = g.initiatePopulation(sizePopulation, baseChromosome, faculty);
 
         date = new Date();
@@ -36,17 +34,9 @@ public class GA1 extends GeneticAlgorithm {
         long unixTime = System.currentTimeMillis() / 1000L;
         System.out.println("UnixTime:" + unixTime);
 
-        //VerticalMutation m = new VerticalMutation();
-        //HorizontalMutation m = new HorizontalMutation();
-        SoftConstraintsMutation m = new SoftConstraintsMutation();
+        HorizontalMutation m = new HorizontalMutation();
         CourseCrossover c = new CourseCrossover();
-        //RandomSelection s = new RandomSelection();
-        ElitistSelection s = new ElitistSelection();
-        //TruncationSelection s = new TruncationSelection();
-        //TournamentSelection s = new TournamentSelection();
-        //SUSSelection s = new SUSSelection();
-        //RouletteSelection s = new RouletteSelection();
-
+        SUSSelection s = new SUSSelection();
 
         Chromosome theBestChromosome = new Chromosome();
         theBestChromosome = population.getBestChromosome();
@@ -60,13 +50,10 @@ public class GA1 extends GeneticAlgorithm {
             //Select population
             population = s.selectPopulation(sizePopulation, population.clone(faculty), faculty);
 
-            // display time and date using toString()
-            //System.out.println(i + date.toString());
             date = new Date();
+            //Write in file
             System.out.println(i + " " + population.getChromosomes().size() + " " + population.getBestFitness() + " " + population.getFitnessAverage() + " " + population.getFitnessStandardDeviation() + " " + date.toString());
             SystemGA.printStatsInFile(population, i, probabilityChromosomeMutation, probabilityGeneMutation, probabilityChromosomesCrossover, percentageDominantChromosome, filename);
-            //SystemGA.printOnScreen(population.getBestChromosome());
-            //SystemGA.pause();
             theBestChromosome.setFitness(faculty);
             population.getBestChromosome().setFitness(faculty);
             if(theBestChromosome.getFitness() >= population.getBestChromosome().getFitness()){

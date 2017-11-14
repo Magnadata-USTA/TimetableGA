@@ -147,8 +147,9 @@ public class SystemGA {
     }
 
     public static  void printStatsInFile(Population population, int generation, double probabilityChromosomeMutation,
-                                         double probabilityGeneMutation, double probabilityChromosomesCrossover, double percentageDominantChromosome){
-        String path = "C:\\Users\\Felipe\\IdeaProjects\\TimetableGA\\output\\Timetable-" +
+                                         double probabilityGeneMutation, double probabilityChromosomesCrossover, double percentageDominantChromosome, String filename){
+        String path = "C:\\Users\\Felipe\\IdeaProjects\\TimetableGAEL\\output\\Timetable-" +
+                filename +
                 String.format("%.2f", probabilityChromosomeMutation) + "-" +
                 String.format("%.2f", probabilityGeneMutation) + "-" +
                 String.format("%.2f", probabilityChromosomesCrossover) + "-" +

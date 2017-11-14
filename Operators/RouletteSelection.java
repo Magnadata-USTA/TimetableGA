@@ -19,7 +19,7 @@ public class RouletteSelection extends Selection {
         ArrayList<Double> fitnessComplement = new ArrayList<Double>();
         double complement = 0;
         for (int i=0; i<size; i++){
-            complement = (totalFitness-population.getChromosomes().get(i).getFitness())/(double)totalFitness;
+            complement = 1-(population.getChromosomes().get(i).getFitness()/(double)totalFitness);
             fitnessComplement.add(complement);
         }
 

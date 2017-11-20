@@ -21,7 +21,7 @@ public class SUSSelection extends Selection {
         ArrayList<Double> fitnessComplement = new ArrayList<Double>();
         double complement = 0;
         for (int i=0; i<size; i++){
-            complement = 1-(population.getChromosomes().get(i).getFitness()/(double)totalFitness);
+            complement = (1-(population.getChromosomes().get(i).getFitness()/(double)totalFitness))*100;
             fitnessComplement.add(complement);
             //System.out.println(population.getChromosomes().get(i).getFitness()+ " " + complement);
         }
@@ -30,7 +30,6 @@ public class SUSSelection extends Selection {
         for (int i=0; i<size; i++){
             totalFitnessComplement += fitnessComplement.get(i);
         }
-
 
         double distance = (double) totalFitnessComplement/size;
         //System.out.println("Distance " + distance + " " + totalFitness);

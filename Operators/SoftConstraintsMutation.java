@@ -143,11 +143,9 @@ public class SoftConstraintsMutation extends Mutation {
                                         }
                                     }
                                 }
-
                             }
                         }
                     }
-
                 }
                 if(!mutatedGene){
                     chromosome.addGene(newGenesSoftConstraints.getGenes().get(j));

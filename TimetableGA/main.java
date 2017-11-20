@@ -6,7 +6,7 @@ import Model.Faculty;
 import Utils.SystemGA;
 
 /**
- * Creat.ed by Felipe on 19/12/2016.
+ * Created by Felipe on 19/12/2016.
  */
 public class main {
 
@@ -21,6 +21,27 @@ public class main {
         double percentageDominantChromosome = 0.80;
 
         Faculty faculty = input.loadData();
+
+        RA_HO_ELI RA_HO_ELI = new RA_HO_ELI();
+        Chromosome c31 = RA_HO_ELI.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
+                probabilityChromosomesCrossover, percentageDominantChromosome);
+        RA_VE_ELI RA_VE_ELI = new RA_VE_ELI();
+        Chromosome c32 = RA_VE_ELI.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
+                probabilityChromosomesCrossover, percentageDominantChromosome);
+        RA_SC_ELI RA_SC_ELI = new RA_SC_ELI();
+        Chromosome c33 = RA_SC_ELI.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
+                probabilityChromosomesCrossover, percentageDominantChromosome);
+        RX_HO_ELI RX_HO_ELI = new RX_HO_ELI();
+        Chromosome c34 = RX_HO_ELI.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
+                probabilityChromosomesCrossover, percentageDominantChromosome);
+        RX_VE_ELI RX_VE_ELI = new RX_VE_ELI();
+        Chromosome c35 = RX_VE_ELI.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
+                probabilityChromosomesCrossover, percentageDominantChromosome);
+        RX_SC_ELI RX_SC_ELI = new RX_SC_ELI();
+        Chromosome c36 = RX_SC_ELI.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
+                probabilityChromosomesCrossover, percentageDominantChromosome);
+
+/*
         //Generation: Random. Mutation: Horizontal.
         RA_HO_RA RA_HO_RA = new RA_HO_RA();
         Chromosome c1 = RA_HO_RA.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
@@ -38,6 +59,8 @@ public class main {
         Chromosome c5 = RA_HO_TSE.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
                 probabilityChromosomesCrossover, percentageDominantChromosome);
 
+
+
         //Generation: Random. Mutation: Vertical.
         RA_VE_RA RA_VE_RA = new RA_VE_RA();
         Chromosome c6 = RA_VE_RA.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
@@ -54,6 +77,7 @@ public class main {
         RA_VE_TSE RA_VE_TSE = new RA_VE_TSE();
         Chromosome c10 = RA_VE_TSE.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
                 probabilityChromosomesCrossover, percentageDominantChromosome);
+
 
         //Generation: BestRandom. Mutation: Horizontal.
         RX_HO_RA RX_HO_RA = new RX_HO_RA();
@@ -122,7 +146,7 @@ public class main {
         RX_SC_TSE RX_SC_TSE = new RX_SC_TSE();
         Chromosome c30 = RX_SC_TSE.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
                 probabilityChromosomesCrossover, percentageDominantChromosome);
-
+*/
         /*
         double stepProbabilityChromosomeMutation = 0.03;
         double stepProbabilityGeneMutation = 0.03;

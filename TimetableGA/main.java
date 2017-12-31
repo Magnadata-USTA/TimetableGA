@@ -15,13 +15,33 @@ public class main {
         //Impact of selection policies
         int sizePopulation = 50;
         int numGenerations = 1000;
-        double probabilityChromosomesCrossover = 0.05;
-        double probabilityChromosomeMutation = 0.07;
-        double probabilityGeneMutation = 0.03;
-        double percentageDominantChromosome = 0.80;
+        double probabilityChromosomesCrossover = 0.03;
+        double probabilityChromosomeMutation = 0.05;
+        double probabilityGeneMutation = 0.04;
+        double percentageDominantChromosome = 0.90;
 
         Faculty faculty = input.loadData();
 
+        RA_HOVE_ELI RA_HOVE_ELI = new RA_HOVE_ELI();
+        Chromosome colcaci1 = RA_HOVE_ELI.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
+                probabilityChromosomesCrossover, percentageDominantChromosome);
+        RA_HOVE_RA RA_HOVE_RA = new RA_HOVE_RA();
+        Chromosome colcaci2 = RA_HOVE_RA.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
+                probabilityChromosomesCrossover, percentageDominantChromosome);
+        RA_HOVE_RWH RA_HOVE_RWH = new RA_HOVE_RWH();
+        Chromosome colcaci3 = RA_HOVE_RWH.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
+                probabilityChromosomesCrossover, percentageDominantChromosome);
+        RA_HOVE_SUS RA_HOVE_SUS = new RA_HOVE_SUS();
+        Chromosome colcaci4 = RA_HOVE_SUS.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
+                probabilityChromosomesCrossover, percentageDominantChromosome);
+        RA_HOVE_TRU RA_HOVE_TRU = new RA_HOVE_TRU();
+        Chromosome colcaci5 = RA_HOVE_TRU.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
+                probabilityChromosomesCrossover, percentageDominantChromosome);
+        RA_HOVE_TSE RA_HOVE_TSE = new RA_HOVE_TSE();
+        Chromosome colcaci6 = RA_HOVE_TSE.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
+                probabilityChromosomesCrossover, percentageDominantChromosome);
+
+/*
         RA_HO_ELI RA_HO_ELI = new RA_HO_ELI();
         Chromosome c31 = RA_HO_ELI.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
                 probabilityChromosomesCrossover, percentageDominantChromosome);
@@ -31,6 +51,7 @@ public class main {
         RA_SC_ELI RA_SC_ELI = new RA_SC_ELI();
         Chromosome c33 = RA_SC_ELI.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
                 probabilityChromosomesCrossover, percentageDominantChromosome);
+
         RX_HO_ELI RX_HO_ELI = new RX_HO_ELI();
         Chromosome c34 = RX_HO_ELI.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
                 probabilityChromosomesCrossover, percentageDominantChromosome);
@@ -40,7 +61,7 @@ public class main {
         RX_SC_ELI RX_SC_ELI = new RX_SC_ELI();
         Chromosome c36 = RX_SC_ELI.run(input, sizePopulation, numGenerations, probabilityChromosomeMutation, probabilityGeneMutation, +
                 probabilityChromosomesCrossover, percentageDominantChromosome);
-
+*/
 /*
         //Generation: Random. Mutation: Horizontal.
         RA_HO_RA RA_HO_RA = new RA_HO_RA();
